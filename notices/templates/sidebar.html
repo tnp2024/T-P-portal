@@ -1,0 +1,198 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/sidebar.css' %}" /> 
+
+    
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    
+</head>
+<body>
+
+    <div class="sidebar-container">
+
+        <div class="horizontal-bar">
+            <div class="erp-logout-links">
+                <a href="https://erp.mgmu.ac.in/" class="erp-col">
+                    <i class='bx bx-link icon erp-icon'></i>
+                    <span class="text nav-text erp-text">ERP</span>
+                </a>
+                <a href="{% url 'logout' %}" class="logout-col">
+                    <i class='bx bx-log-out icon logout-icon'></i>
+                    <span class="text nav-text logout-text">Logout</span>
+                </a>
+            </div>
+        </div>
+
+
+    <nav class="sidebar">
+        <header>
+            <div class="profile-container">
+                <div class="profile-picture">
+                    {% if user_profile.Profile_photo %}
+                    <img src="{{ user_profile.Profile_photo.url }}" alt="Profile Picture" class="profile-image" />
+                    {% else %}
+                    <img src="{% static 'images/user-default.png.' %}" alt="Placeholder Profile Picture" class="profile-image" />
+                    {% endif %}
+                </div>
+                <div class="profile-info">
+                    <span class="name">
+                        {% if request.user.student %}
+                        {{ request.user.student.FIRST_NAME }}
+                        {{ request.user.student.PRN }}
+                        {% elif request.user.coordinator %} 
+                        {{ request.user.coordinator.NAME }}
+                        {{ request.user.coordinator.C_ID }}
+                        {% elif request.user.tnpoffice %} 
+                        {{ request.user.tnpoffice.NAME }} 
+                        {{ request.user.tnpoffice.T_ID }} 
+                        {% endif %}
+                    </span>
+                    <span class="profession">{% if request.user.tnpoffice %}
+                        {{ request.user.user_type}} 
+                        {% endif %}
+
+                    </span>
+                    <span class="department">{% if request.user.user_type == 'Student' %}
+                        <span class="department">{{ request.user.student.department }}</span>
+                    {% elif request.user.user_type == 'Coordinator' %}
+                        <span class="department">{{ request.user.coordinator.department }}</span>
+                    {% endif %}</span>
+
+                </div>
+            </div>
+        </header>
+        <div class="menu-bar">
+            <div class="menu">
+               
+            <ul class="menu-links">
+                {% if request.user.is_authenticated and request.user.user_type != 'Student' %}
+
+                <div class="search-container">
+                    <form method="GET" action="{% url 'search_students' %}">
+                        <input type="text" name="query" placeholder="Search students...">
+                        <button type="submit"><i class='bx bx-search'></i></button>
+                    </form>
+                </div>
+                {% endif %}
+
+                {% if request.user.is_authenticated and request.user.user_type == 'TNP-Office' %}
+
+                <ul class="menu-links">
+                    <li class="nav-link {% if request.path|slice:":10" == '/dashboard' %}active{% endif %}">
+                        <a href="{% url 'dashboard' %}">
+                            <i class='bx bx-home-alt icon' ></i>
+                            <span class="text nav-text">Dashboard</span>
+                        </a>
+                    </li>
+                    {% endif %}
+
+                    {% if request.user.is_authenticated and request.user.user_type != 'Student' %}
+
+                    <li class="nav-link {% if request.path|slice:":8" == '/profile' %}active{% endif %}">
+                        <a href="{% url 'profile' %}">
+                            <i class='bx bx-user-circle icon' ></i>
+                            <span class="text nav-text">Profile</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                    {% if request.user.is_authenticated and request.user.user_type == 'Student' %}
+
+                    <li class="nav-link {% if request.path|slice:":16" == '/student-profile' %}active{% endif %}">
+                        <a href="{% url 'student_profile' student_prn=request.user.student.PRN %}">
+                            <i class='bx bx-user-circle icon'></i>
+                            <span class="text nav-text">Profile</span>
+                        </a>
+                    </li>
+                {% endif %}
+
+                <li class="nav-link {% if request.path|slice:":11" == '/all-drives' %}active{% endif %}">
+                    <a href="{% url 'all-drives' %}">
+                            <i class='bx bxs-megaphone icon' ></i>
+                            <span class="text nav-text">Drives</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link {% if request.path|slice:":11" == '/activities' %}active{% endif %}">
+                        <a href="{% url 'activities' %}">
+                            <i class='bx bx-collection icon'></i>
+                            <span class="text nav-text">Activities</span>
+                        </a>
+                    </li>
+                    {% if request.user.is_authenticated and request.user.user_type == 'Student' %}
+
+                    <li class="nav-link {% if request.path|slice:":16" == '/my_applications' %}active{% endif %}">
+                        <a href="{% url 'my_applications' student_prn=request.user.student.PRN %}">
+                            <i class='bx bx-folder-open icon' ></i>
+                            <span class="text nav-text">My Applications</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                    {% if request.user.is_authenticated and request.user.user_type != 'Student' %}
+
+                    <li class="nav-link {% if request.path == '/all_students/' %}active{% endif %}">
+                        <a href="{% url 'all_students' %}">
+                            <i class='bx bxs-user-account icon' ></i>
+                            <span class="text nav-text">Students</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                    {% if request.user.is_authenticated and request.user.user_type == 'TNP-Office' %}
+                    
+
+                    <li class="nav-link {% if request.path == '/all-coordinators/' %}active{% endif %}">
+                        <a href="{% url 'all_coordinators' %}">
+                            <i class='bx bxs-id-card icon' ></i>
+                            <span class="text nav-text">Coordinators</span>
+                        </a>
+                    </li>
+                    {% endif %}
+               
+
+                    <!-- <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bx-bell icon' ></i>
+                            <span class="text nav-text">Notification</span>
+                        </a>
+                    </li> -->
+                    {% if request.user.is_authenticated and request.user.user_type == 'Coordinator' %}
+
+                    <li class="nav-link {% if request.path == '/change_requests/' %}active{% endif %}">
+                        <a href="{% url 'profile_change_requests' %}">
+                            <i class='bx bx-bell icon'></i>
+                            <span class="text nav-text">Approvals</span>
+                            {% if request.user.user_type == 'Coordinator' %}
+                                {% if pending_changes_count > 0 %}
+                                    <span class="badge badge-pill badge-danger">{{ pending_changes_count }}</span>
+                                {% endif %}
+                            {% endif %}
+                        </a>
+                    </li>
+                    {% endif %}
+
+
+
+                    <!-- <li class="nav-link">
+                        <div class="sun-moon">
+                            <i class='bx bx-moon icon moon'></i>
+                        </div>
+                        <span class="mode-text text">Dark mode</span>
+                        <div class="toggle-switch">
+                            <span class="switch"></span>
+                        </div>
+                    </li> -->
+            </ul>   
+
+            </div>
+
+        <!-- </div> -->
+    </nav>
+
+       
+    </div>
+</body>
+</html>

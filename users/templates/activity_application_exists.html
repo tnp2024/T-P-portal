@@ -1,0 +1,9 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div class="exists_container">
+       
+        <p class ='exists'>You have already applied to this ACTIVITY</p>
+        <a href="{% url 'activities' %}" class="exists_button">OK</a>
+    </div>
+{% endblock content %}

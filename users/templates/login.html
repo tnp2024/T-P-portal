@@ -1,0 +1,155 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login Form</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}" /> 
+
+</head>
+<body>
+<div class="container">
+    <div class="left-section">
+      <div class="upper-left">
+        <h1>Central Training & Placement Department</h1>
+        <h3>Providing opportunities and preparing for the workforce.</h3>
+    </div>
+        <div class="lower-left">
+            <!-- Add your image here -->
+            <img src="{% static 'images/image.png' %}">
+
+        </div>
+    </div>
+    <div class="right-section">
+        <div class="login-container">
+            <h1>Login to Your Account</h1>
+            <form method="POST" id="loginForm">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" id="email" name="email" placeholder="Enter your email">
+                    <i class="fas fa-envelope"></i>
+                    <div class="greeting">Welcome back!</div>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="password" name="password" placeholder="Enter your password">
+                    <i class="fas fa-eye toggle-password"></i>
+                    <div class="greeting">Keep your account secure.</div>
+                </div>
+                {% if messages %}
+                {% for message in messages %}
+                    <p style="color: red;">{{ message }}</p>
+                {% endfor %}
+                {% endif %}
+                <button type="submit" class="btn-primary">Login</button>
+                <div class="login-options">
+                    <a href="#" id="registerLink">Register</a>
+                    |
+                    <a href="{% url 'password_reset' %}">Forgot Password?</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+    <!-- Terms and Conditions Pop-up -->
+    <div class="popup-overlay" id="termsPopup" style="display: none;">
+        <div class="popup-content">
+            <div class="close-box">
+                <button class="close-btn" onclick="closePopup()">&times;</button>
+            </div>
+            <h3>UNDERTAKING FROM STUDENTS</h3>
+        
+            <ol>
+                <li>I will register my name by filling up the details on the Placement portal on ERP (or wherever as communicated by the Training and Placement Office) and only after successful registration, I shall be allowed to participate in the training and placement activities.</li>
+                <li>I understand that after the successful submission of my online registration on JNEC placement portal, it is not possible to resubmit or modify the data.</li>
+                <li>However, if I want to modify the data at the later stage because of improvement in my CGPA or clearing off my backlogs, then I should submit a hardcopy application along with proof of documents with the recommendation of my respective department placement faculty coordinator and HoD.</li>
+                <li>I understand that I am responsible for filling/providing my complete/correct details to the company for the campus placement process through online or offline process as per given deadlines.</li>
+                <li>I shall understand the criteria provided by the visiting companies and abide by the criteria before registering my name for campus placement drive.</li>
+                <li>I assure you that I will check all announcements/notices/updated information/shortlisted names etc. on the notice boards of Training and Placement/ Department Notice Board/email or any online medium of communication.</li>
+                <li>I understand that as per the college rules my department placement coordinator will be acting as the single point of contact for all kinds of our doubts and further clarifications/communications (such as for placement assistance, updating details, and coordination with the visiting companies, etc.)</li>
+                <li>I will regularly read my emails sent by the placement office and respond within the stipulated time.</li>
+                <li>I will make my own arrangements for attending the selection process (such as Written Test, GD, Interview, etc.) of the company at the designated location as per the schedule announced by the T & P Office.</li>
+                <li>I will attend all the training and placement workshops and briefing sessions organized by the placement office, and I will fully adhere to the Placement policies and procedures.</li>
+                <li>I will never go directly to the company regarding any placement concern and will route all my queries through the placement cell.</li>
+                <li>I assure that I will not discuss the company packages with the visiting company personnel or with fellow students.</li>
+                <li>I will not entertain the company personnel directly and will route all clarifications and queries through the placement office.</li>
+                <li>I will inform the placement office if I want to apply for off-campus placement to any other company, in such cases, I will not be allowed to participate in any on-campus drives.</li>
+                <li>Once selected, I will join the company on the specified date and will inform the placement office after joining the company by submitting a copy of my appointment letter and joining report.</li>
+                <li>I will honor the offers received through the college campus placement cell and I will not appear for any off-campus interviews after receiving the first offer.</li>
+                <li>I assure you that I will keep up the decorum and maintain the discipline of the placement office. I will not engage in any kind of unfair means or malpractices during the placement process.</li>
+                <li>I will strictly follow the dress code as per the placement office guidelines for all placement activities and drives. The minimum dress code for placement activities is as follows:
+                    <ul>
+                        <li>Boys: College uniform/ Full sleeve shirt with Tie and formal trouser and formal shoes.</li>
+                        <li>Girls: College uniform/ Salwar Kameez with dupatta or saree or western formals.</li>
+                        <li>That I must come formally dressed whenever I participate in any sort of interaction with a company.</li>
+                    </ul>
+                </li>
+                <li>I understand that I will be eligible for the placement assistance only once through the campus.</li>
+                <li>After getting the first offer I will be considered as placed through campus and I will not be allowed to participate in further campus drives.</li>
+                <li>If I reject the offer made by the company, I will not be allowed to appear for other placement activities.</li>
+                <li>If I get selected in a particular company, I will not have any objection for my name being declared by the Training and Placement office through any medium (Notice board, Online, etc.)</li>
+                <li>I will honor my selection by a company, if selected, I will complete all the joining formalities as per the deadline                <li>I will honor my selection by a company, if selected, I will complete all the joining formalities as per the deadlines.</li>
+                <li>If I am selected in the pool campus placement drive, I will be responsible to complete all the joining formalities and required processes on my own.</li>
+                <li>I will not engage in any discussion or disagreement with the representatives of the company visiting the campus.</li>
+                <li>I will be solely responsible for any disciplinary action taken by the T & P Cell or the company against me due to violation of rules or misconduct during the placement process.</li>
+            </ol>
+
+            <p>By clicking the "Accept" button, you agree to abide by the above undertakings.</p>
+            <button type="button" id="agreeBtn" class="btn btn-success">I Agree</button>
+        </div>
+    </div>
+
+    <script>
+      // Function to close the pop-up
+      function closePopup() {
+          document.getElementById('termsPopup').style.display = 'none';
+      }
+  
+      // JavaScript to toggle password visibility
+      document.querySelector('.toggle-password').addEventListener('click', function (e) {
+          var passwordInput = document.getElementById('password');
+          if (passwordInput.type === 'password') {
+              passwordInput.type = 'text';
+              e.target.classList.remove('fa-eye');
+              e.target.classList.add('fa-eye-slash');
+          } else {
+              passwordInput.type = 'password';
+              e.target.classList.remove('fa-eye-slash');
+              e.target.classList.add('fa-eye');
+          }
+      });
+  
+      // JavaScript for greeting animation
+      document.querySelectorAll('.form-group input').forEach(input => {
+          input.addEventListener('focus', function() {
+              this.nextElementSibling.nextElementSibling.style.opacity = 1;
+          });
+          input.addEventListener('blur', function() {
+              this.nextElementSibling.nextElementSibling.style.opacity = 0;
+          });
+      });
+  
+      // JavaScript for handling the pop-up and redirection
+      document.getElementById('registerLink').addEventListener('click', function(event) {
+          event.preventDefault();
+          document.getElementById('termsPopup').style.display = 'flex';
+      });
+  
+      document.getElementById('agreeBtn').addEventListener('click', function() {
+          document.getElementById('termsPopup').style.display = 'none';
+          window.location.href = "{% url 'register-student' %}";
+      });
+  
+      // Close the pop-up if clicked outside of the content
+      window.addEventListener('click', function(event) {
+          const popup = document.getElementById('termsPopup');
+          if (event.target === popup) {
+              popup.style.display = 'none';
+          }
+      });
+    </script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<div class="search_container">
+    <h1 class="search_heading">Search Results for "{{ query }}"</h1>
+    <ul class="search_results">
+        {% for student in students %}
+        <li>
+            <a href="{% url 'student_profile' student_prn=student.PRN %}">
+                {{ student.FIRST_NAME }} {{ student.MIDDLE_NAME }} {{ student.LAST_NAME }}  ({{ student.PRN }})
+            </a>
+        </li>
+        {% empty %}
+        <li>No results found.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

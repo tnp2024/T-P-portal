@@ -1,0 +1,31 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+    <div class="drive_card">
+        <h1 class="dropdown-btn">Create Drive</h1>
+        <div class="drive_card-body hidden">
+            <form id="jobForm"  method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+                {% for field in form %}
+                    <div class="form-group">
+                        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        {{ field }}
+                    </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-submit">Create</button>
+            </form>
+        </div>
+    </div>
+   
+
+
+{% endblock content %}
+
+
+
+
+
+
+
+

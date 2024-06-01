@@ -1,0 +1,70 @@
+{% extends 'main.html' %}
+
+{% block content %}
+{% load static %}
+
+<div class="centered-container">
+    <div class="drive-details">
+
+        <header>
+           
+            <header>
+                <h1>MGM University</h1>
+                <h2 class="unbold">Chhatrapati Sambhajinagar</h2>
+                <h2>Training and Placement Department</h2>
+                <img src="{% static 'images/header.jpg' %}" alt="Logo" class="header-logo">
+                <p class="clg_name"> Jawaharlal Nehru Engineering College<p>
+
+            <hr>
+            </header>
+
+        </header>
+
+        <h2 class="title">Campus Placement Activity by: {{ activity.company_name }}</h2>
+            <div class="logo-container">
+                <img src="{{ activity.company_logo.url }}" alt="Company Logo" class="logo">
+            </div>        
+            <h2>{{ activity.title }}</h2>    
+            <p><strong>Company Name:</strong> {{ activity.company_name }}</p>
+            <p><strong>Date:</strong> {{ activity.activity_date }}</p>
+            <p><strong>About:</strong> {{ activity.content }}</p>
+            <p><strong>Industry Type:</strong> {{ activity.industry_type }}</p>
+
+            <p><strong>Departments:</strong>
+                {% for department in activity.department.all %}
+                    {{ department.name }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </p>
+            <footer>
+                <p class="office_name">Dr. Parminder Kaur</p>
+                <p class="office_name">Head, Training and Placement</p>
+                <p class="office_name">MGM University</p>
+
+                
+            
+            </footer>
+
+            <div class="button-container">
+                <a href="{% url 'activities' %}" class="link">All activities</a>
+                {% if request.user.is_authenticated and request.user.user_type == 'TNP-Office' %}
+
+
+                
+                <a href="{% url 'update-activity' activity.activity_id %}" class="link">Update</a>
+                <a href="{% url 'delete-activity' activity.activity_id %}" class="link">Delete</a>
+                {% endif %}
+                <a href="{% url 'download_activity_pdf' activity.activity_id %}" class="link">Download PDF</a>
+                {% if request.user.is_authenticated and request.user.user_type == 'Student' %}
+                <a href="{% url 'apply_activity' activity.activity_id %}" class="link">Apply Now</a>
+                {% endif %}
+                {% if request.user.is_authenticated and request.user.user_type == 'Coordinator' %}
+
+                <a href="{% url 'activity_applied_students' activity.activity_id %}" class="link">View Applied Students</a>
+
+                {% endif %}
+
+            </div>       
+        </div>
+    </div>
+
+{% endblock content %}

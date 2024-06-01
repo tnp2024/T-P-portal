@@ -1,0 +1,16 @@
+
+{% extends 'main.html' %}
+
+{% block content %}
+
+
+{% if request.user.is_authenticated and request.user.user_type == 'TNP-Office' %}
+  <div class="notice_button">
+    
+    <a href="{% url 'create-drive' %}"><button id="create_drive">Create Drive</button></a>
+    <a href="{% url 'create-activity' %}"><button id="create_activity">Create Activity</button></a>
+     
+  </div>
+  {% endif %} 
+
+{% endblock content %}

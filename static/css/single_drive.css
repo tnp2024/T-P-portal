@@ -1,0 +1,165 @@
+header {
+    font-family: 'Poppins', sans-serif;
+    font-size: x-small;
+    font-weight: lighter;
+    position: relative;
+
+}
+
+h1.sd-header {
+    margin-left: 20px;
+
+}
+
+header h1.sd-header,
+header h2 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 5px;
+    color: black;
+    /* Adjust this value to reduce the space between h1 and h2 */
+
+}
+
+header h2.unbold {
+    font-weight: lighter;
+}
+
+p.clg_name {
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+    font-size: x-large;
+    margin-top: 5px;
+    /* Adjust this value to add space between p and h2 */
+
+}
+
+p.office_name {
+    text-align: right;
+    font-size: small;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+.to_dept p:not(:last-child),
+.to_authority p:not(:last-child) {
+    margin-top: 0;
+    margin-bottom: 0px;
+}
+
+.to_authority,
+.to_dept {
+    text-align: left;
+    font-size: small;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 0px;
+}
+
+
+.header-logo {
+    position: absolute;
+    top: -10px;
+    right: -50px;
+    margin-right: 80px;
+    /* Adjust as needed */
+    width: 150px;
+    /* Adjust width as needed */
+    height: auto;
+}
+
+.centered-container {
+    font-family: Arial, sans-serif;
+    margin-top: 2cm;
+    margin-bottom: auto;
+    margin-left: 9cm;
+    /* transform: translateX(-50%); */
+    padding: 15px;
+    width: 1000px;
+    height: 900px;
+}
+
+
+
+h2.title {
+    text-align: center;
+    font-size: small;
+    font-weight: bold;
+}
+
+hr {
+    border: 2px solid;
+    /* Adjust the border-width as needed */
+    border-style: inset;
+    /* Adjust the border-style to achieve the desired boldness */
+}
+
+.drive-details {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
+    border: 3px solid #000000;
+    margin-bottom: auto;
+
+    /* Enable vertical scrolling */
+    /* Prevent box shadow from overflowing */
+    box-sizing: border-box;
+    /* Include padding and border in the element's total width and height */
+    width: 870px;
+    /* Limit the width of the drive-details section */
+    margin: 0 auto;
+    /* Center the drive-details section horizontally */
+    align-items: center;
+    color: black;
+    height: auto;
+    /* Set a fixed height for the drive-details section */
+}
+
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    /* Center the logo horizontally */
+    margin-bottom: 20px;
+}
+
+.logo {
+    max-width: 100%;
+    /* Ensure the logo fits the container */
+    max-height: 180px;
+    /* Limit the maximum height of the logo */
+
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    text-decoration: none;
+    color: white;
+
+}
+
+.link {
+    display: inline-block;
+    padding: 10px;
+    padding: 8px 16px;
+    background-color: #0f3243;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    gap: 20px;
+}
+
+.link:hover {
+    background-color: #63bbd1cc;
+    color: white;
+    cursor: pointer;
+}
+
+.detail-item p {
+    margin: 10px 0;
+    /* Adjust margin between detail items */
+}

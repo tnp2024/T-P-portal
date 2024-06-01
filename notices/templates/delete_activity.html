@@ -1,0 +1,15 @@
+{% extends 'main.html' %}
+
+    {% block content %}
+    <div class="delete_container">
+        <form method="post">
+            {% csrf_token %}
+            <p class="delete_p">Are you sure you want to delete "{{activity.title}}"?</p>
+            <div class="delete_button_container">
+                <a class="Cancel_button" href="{% url 'activities' %}"> Cancel </a>
+                <button type="submit" class="Delete_button">Yes, Sure</button>
+
+            </div>
+        </form>
+    </div>
+    {% endblock content %}

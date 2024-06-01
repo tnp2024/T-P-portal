@@ -1,0 +1,273 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/table.css' %}" /> 
+
+    <title>Document</title>
+    <style>
+        .back-button {
+          background-color: black;
+          font-size: 25px; /* Increased font size for thicker arrow */
+          color: white;
+          border: none;
+          border-radius: 50%;
+          padding: 10px 20px;
+          cursor: pointer;
+         line-height: 1; /* Set line height to 1 to vertically center */
+          text-align: center; /* Align text horizontally */
+          width: 40px; /* Set a fixed width */
+          height: 40px; /* Set a fixed height */
+          display: flex; /* Use flexbox for vertical centering */
+          justify-content: center; /* Center content horizontally */
+          align-items: center; /* Center content vertically */
+        }
+        
+        .back-button:hover {
+          background-color: #333;
+        }
+        
+        
+        </style>
+</head>
+<body>
+    <button class="back-button" onclick="goBack()">
+        <span>&#11013;</span> 
+      </button>
+
+
+<h1 style="text-align: center; color: black; font-size: xx-large;">Student Applied for {{ activity.title }} Activity</h1>
+<div class="student-button-container">
+    <button onclick="applyFilters()" id="applyButton" class="student-button">Apply</button>
+    <button onclick="downloadTable()" class="student-button">Download</button>
+</div>
+<table id="myTable" class="student-table">
+    <tr>
+        <th>FIRST NAME</th>
+        <th>MIDDLE NAME</th>
+        <th>LAST NAME</th>
+        <th>PRN</th>
+        <th>DOB</th>
+        <th>GENDER
+            <select class="filter-dropdown" id="genderFilter">
+                <option value="all">All</option>
+                <option value="M">Male</option>
+                <option value="F">Female</option></th>
+
+        <th>EMAIL</th>
+        <th>PERSONAL EMAIL</th>
+        <th>AGE</th>
+        <th>MOBILE NO</th>
+        <th>ALTERNATE MOBILE NO</th>
+        <th>LOCAL ADDRESS</th>
+        <th>PERMANENT ADDRESS</th>
+        <th>NATIVE PLACE</th>
+        <th>X_Percentage
+            <select class="filter-dropdown" id="xPercentFilter">
+                <option value="all">All</option>
+                <option value=">=60"> % > = 60 </option>
+                <option value="<60"> % < 60 </option> </th>
+
+        <th>10th Year of passing</th>
+        <th>10th Board</th>
+        <th>XII_Percentage
+            <select class="filter-dropdown" id="xiiPercentFilter">
+                <option value="all">All</option>
+                <option value=">=60"> % > = 60 </option>
+                <option value="<60"> % < 60 </option> </th>
+
+        <th>12th Year of passing</th>
+        <th>12th Board</th>
+        <th>Diploma_percentage
+            <select class="filter-dropdown" id="diplomaPercentFilter">
+                <option value="all">All</option>
+                <option value=">=60"> % > = 60 </option>
+                <option value="<60"> % < 60 </option>
+        </th>
+
+        <th>Diploma Year of passing</th>
+        <th>Diploma College</th>
+        <th>Diploma Branch</th>
+        <th>Admission Type</th>
+        <th>Pass out Year</th>
+        <th>Department</th>
+        <th>SEM1 sgpa</th>
+        <th>SEM2 sgpa</th>
+        <th>SEM3 sgpa</th>
+        <th>SEM4 sgpa</th>
+        <th>SEM5 sgpa</th>
+        <th>SEM6 sgpa</th>
+        <th>SEM7 sgpa</th>
+        <th>SEM8 sgpa</th>
+        <th>AVG  cgpa</th>
+        <th>AVG_TILL_SEM_percentage
+            <select class="filter-dropdown" id="avgPercentFilter">
+                <option value="all">All</option>
+                <option value=">=60"> % > = 60 </option>
+                <option value="<60"> % < 60 </option>
+        </th>
+
+        <th>Live_backlogs
+
+            <select class="filter-dropdown" id="liveBacklogFilter">
+                <option value="all">All</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+        </th>
+        <th>Dead_backlogs
+            <select class="filter-dropdown" id="deadBacklogFilter">
+                <option value="all">All</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+        </th>
+        <th>Year_gap
+            <select class="filter-dropdown" id="yearGapFilter">
+                <option value="all">All</option>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+        </th>
+
+        <th>Preference 1</th>
+        <th>Preference 2</th>
+        <th>Preference 3</th>
+        <th>Placed
+            <select class="filter-dropdown" id="placedFilter">
+                <option value="all">All</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+        </th>
+
+        
+    </tr>
+    </thead>
+    <tbody>
+        {% for application in activity_applications %}
+        <tr>
+            <td>{{ application.student.FIRST_NAME }}</td>
+            <td>{{ application.student.MIDDLE_NAME }}</td>
+            <td>{{ application.student.LAST_NAME }}</td>
+            <td>{{ application.student.PRN }}</td>
+            <td>{{ application.student.DOB }}</td>
+            <td>{{ application.student.GENDER }}</td>
+            <td>{{ application.student.EMAIL }}</td>
+            <td>{{ application.student.PERSONAL_EMAIL }}</td>
+            <td>{{ application.student.AGE }}</td>
+            <td>{{ application.student.MOBILE_NO }}</td>
+            <td>{{ application.student.ALT_Mobile_NO }}</td>
+            <td>{{ application.student.LOCAL_ADDRS }}</td>
+            <td>{{ application.student.PERM_ADDRS }}</td>
+            <td>{{ application.student.Native_Place }}</td>
+            <td>{{ application.student.X_Percentage }}</td>
+            <td>{{ application.student.X_year_of_passing }}</td>
+            <td>{{ application.student.X_board }}</td>
+            <td>{{ application.student.XII_Percentage }}</td>
+            <td>{{ application.student.XII_year_of_passing }}</td>
+            <td>{{ application.student.XII_board }}</td>
+            <td>{{ application.student.Diploma_percentage }}</td>
+            <td>{{ application.student.Diploma_year_of_passing }}</td>
+            <td>{{ application.student.Diploma_college }}</td>
+            <td>{{ application.student.Diploma_branch }}</td>
+            <td>{{ application.student.Admission_Type }}</td>
+            <td>{{ application.student.Pass_out_Year }}</td>
+            <td>{{ application.student.department }}</td>
+            <td>{{ application.student.SEM_1_sgpa }}</td>
+            <td>{{ application.student.SEM_2_sgpa }}</td>
+            <td>{{ application.student.SEM_3_sgpa }}</td>
+            <td>{{ application.student.SEM_4_sgpa }}</td>
+            <td>{{ application.student.SEM_5_sgpa }}</td>
+            <td>{{ application.student.SEM_6_sgpa }}</td>
+            <td>{{ application.student.SEM_7_sgpa }}</td>
+            <td>{{ application.student.SEM_8_sgpa }}</td>
+            <td>{{ application.student.AVG_TILL_SEM_cgpa }}</td>
+            <td>{{ application.student.AVG_TILL_SEM_percentage }}</td>
+            <td>{{ application.student.Live_backlogs }}</td>
+            <td>{{ application.student.Dead_backlogs }}</td>
+            <td>{{ application.student.Year_gap }}</td>
+            <td>{{ application.student.Preference_1 }}</td>
+            <td>{{ application.student.Preference_2 }}</td>
+            <td>{{ application.student.Preference_3 }}</td>
+            <td>{{ application.student.Placed }}</td>
+            
+
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        function applyFilters() {
+            var genderFilter = document.getElementById("genderFilter").value;
+            var xPercentFilter = document.getElementById("xPercentFilter").value;
+            var xiiPercentFilter = document.getElementById("xiiPercentFilter").value;
+            var diplomaPercentFilter = document.getElementById("diplomaPercentFilter").value;
+            var avgPercentFilter = document.getElementById("avgPercentFilter").value;
+            var liveBacklogFilter = document.getElementById("liveBacklogFilter").value;
+            var deadBacklogFilter = document.getElementById("deadBacklogFilter").value;
+            var yearGapFilter = document.getElementById("yearGapFilter").value;
+            var placedFilter = document.getElementById("placedFilter").value;
+
+            var table = document.getElementById("myTable");
+            var rows = table.getElementsByTagName("tr");
+
+            for (var i = 1; i < rows.length; i++) {
+                var row = rows[i];
+                var genderCell = row.cells[5];
+                var xPercentCell = row.cells[14];
+                var xiiPercentCell = row.cells[17];
+                var diplomaPercentCell = row.cells[20];
+                var avgPercentCell = row.cells[36];
+                var liveBacklogCell = row.cells[37];
+                var deadBacklogCell = row.cells[38];
+                var yearGapCell = row.cells[39];
+                var placedCell = row.cells[43];
+
+                if (
+                    (genderFilter === "all" || genderCell.textContent.trim() === genderFilter) &&
+                    (xPercentFilter === "all" || xPercentCell.textContent.trim() === xPercentFilter) &&
+                    (xiiPercentFilter === "all" || xiiPercentCell.textContent.trim() === xiiPercentFilter) &&
+                    (diplomaPercentFilter === "all" || diplomaPercentCell.textContent.trim() === diplomaPercentFilter) &&
+                    (avgPercentFilter === "all" || avgPercentCell.textContent.trim() === avgPercentFilter) &&
+                    (liveBacklogFilter === "all" || liveBacklogCell.textContent.trim() === liveBacklogFilter) &&
+                    (deadBacklogFilter === "all" || deadBacklogCell.textContent.trim() === deadBacklogFilter) &&
+                    (yearGapFilter === "all" || yearGapCell.textContent.trim() === yearGapFilter) &&
+                    (placedFilter === "all" || placedCell.textContent.trim() === placedFilter)
+                ) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            }
+        }
+
+        var applyButton = document.getElementById("applyButton");
+        if (applyButton) {
+            applyButton.addEventListener("click", applyFilters);
+        } else {
+            console.error("Button with ID 'applyButton' not found.");
+        }
+    });
+
+    function downloadTable() {
+        // Select the table
+        var table = document.getElementById("myTable");
+
+        // Convert the table to a workbook
+        var wb = XLSX.utils.table_to_book(table);
+
+        // Convert the workbook to a binary Excel file and download it
+        XLSX.writeFile(wb, 'filtered_table.xlsx');
+}
+
+function goBack() {
+  window.history.back();
+  }
+</script>
+
+</body>
+</html>
+

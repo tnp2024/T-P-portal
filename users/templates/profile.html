@@ -1,0 +1,55 @@
+
+{% extends 'main.html' %}
+{% block content %} 
+{% load static %}
+    <div class="coordinatorContainer">
+        {% if request.user.user_type == 'Coordinator' %}
+            <div class="coordinator-pr-card">
+                <div class="coordinator-pr-card-header">
+                    {% if coordinator.Profile_photo %}
+                        <img class="co_profile_img" src="{{ coordinator.Profile_photo.url }}" alt="Coordinator DP">
+                    {% else %}
+                        <img src="{% static 'images/user-default.png.' %}" alt="Coordinator DP" />
+                    {% endif %}
+                    <h3>NAME: {{ coordinator.NAME }}</h3>
+                </div>
+                <div class="coordinator-pr-card-body">
+                    <p class="mb-0"><strong class="pr-1">Coordinator ID:</strong> {{ coordinator.C_ID }}</p>
+                    <p class="mb-0"><strong class="pr-1">Gender:</strong> {{ coordinator.get_GENDER_display }}</p>
+                    <p class="mb-0"><strong class="pr-1">Phone Number:</strong> {{ coordinator.PHONE_NO }}</p>
+                    <p class="mb-0"><strong class="pr-1">Email:</strong> {{ coordinator.EMAIL }}</p>
+                    <p class="mb-0"><strong class="pr-1">Personal Email:</strong> {{ coordinator.PERSONAL_EMAIL }}</p>
+                    <p class="mb-0"><strong class="pr-1">Department:</strong> {{ coordinator.department }}</p>
+                    <p class="mb-0"><strong class="pr-1">Institute:</strong> {{ coordinator.INSTITUTE }}</p>
+                </div>
+                <a href="{% url 'coordinator_edit' %}" class="btn btn-primary">Edit Profile</a>
+
+            </div>
+       
+        {% elif request.user.user_type == 'TNP-Office' %}
+   
+                        <div class="coordinator-pr-card">
+                            <div class="coordinator-pr-card-header">
+                                {% if tnpoffice.Profile_photo %}
+                                    <img class="co_profile_img" src="{{ tnpoffice.Profile_photo.url }}" alt="TNP Office DP">
+                                {% else %}
+                                    <img src="{% static 'images/user-default.png.' %}" alt="TNP Office DP" />
+                                {% endif %}
+                                <h3>NAME: {{ tnpoffice.NAME }}</h3>
+                            </div>
+                            <div class="coordinator-pr-card-body">
+                                <p class="mb-0"><strong class="pr-1">TNP Office ID:</strong> {{ tnpoffice.T_ID }}</p>
+                                <p class="mb-0"><strong class="pr-1">Phone Number:</strong> {{ tnpoffice.PHONE_NO }}</p>
+                                <p class="mb-0"><strong class="pr-1">Email:</strong> {{ tnpoffice.EMAIL }}</p>
+                                <p class="mb-0"><strong class="pr-1">Personal Email:</strong> {{ tnpoffice.PERSONAL_EMAIL }}</p>
+
+                            </div>
+                            <a href="{% url 'tnpoffice_edit' %}" class="btn btn-primary">Edit Profile</a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    {% if not applied_activities and not applied_drives %}
+        <p>No applications found. <a href="{% url 'all-drives' %}">Go to drives</a></p>
+    {% else %}
+    <div class="application-table-container" >
+        {% if request.user.user_type != 'Student' %}
+
+        <h1>Student's Applications </h1>
+        {% else %}
+
+        <h1>My Applications </h1>
+        {% endif %}
+
+        <table class="application-table">
+            <tr>
+                <th>TYPE</th>
+                <th>TITLE</th>
+                <th>DATE OF APPLICATION</th>
+                <th>ROUND 1</th>
+                <th>ROUND 2</th>
+                <th>ROUND 3</th>
+                <th>ROUND 4</th>
+                <th>ROUND 5</th>
+                <th>SELECTED</th>
+            </tr>
+            {% for application in applied_activities %}
+                <tr>
+                    <td>ACTIVITY</td>
+                    <td><a href="{% url 'activity' application.activity.pk %}"style="color: #2391ad;">{{ application.activity.title }}</a></td>
+                    <td>{{ application.applied_date }}</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                </tr>
+            {% endfor %}
+            {% for application in drive_applications %}
+                <tr>
+                    <td>DRIVE</td>
+                    <td><a href="{% url 'drive' application.drive.pk %}" style="color: #2391ad;">{{ application.drive.title }}</a></td>
+                    <td>{{ application.applied_date }}</td>
+                    <td>{% if application.round1 %}Completed{% else %}Pending{% endif %}</td>
+                    <td>{% if application.round2 %}Completed{% else %}Pending{% endif %}</td>
+                    <td>{% if application.round3 %}Completed{% else %}Pending{% endif %}</td>
+                    <td>{% if application.round4 %}Completed{% else %}Pending{% endif %}</td>
+                    <td>{% if application.round5 %}Completed{% else %}Pending{% endif %}</td>
+                    <td>{% if application.selected %}Yes{% else %}No{% endif %}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>    
+    {% endif %}
+
+{% endblock %}

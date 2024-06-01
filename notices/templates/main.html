@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JNEC T&P PORTAL</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css"> 
+
+  <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'css/trailcard.css' %}" /> 
+  <link rel="stylesheet" type="text/css" href="{% static 'css/delete_activity.css' %}" /> 
+  <!-- <link rel="stylesheet" type="text/css" href="{% static 'css/upload.css' %}" />  -->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/exists.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}" /> 
+  <link rel="stylesheet" type="text/css" href="{% static 'css/coordinator_profile.css' %}" /> 
+  <link rel="stylesheet" type="text/css" href="{% static 'css/search.css' %}" /> 
+  <link rel="stylesheet" type="text/css" href="{% static 'css/my_applications.css' %}" /> 
+  <link rel="stylesheet" type="text/css" href="{% static 'css/edit_profile.css' %}" />
+  <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+
+
+
+
+
+
+
+
+
+  <!-- <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet"> -->
+  <!-- <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'> -->
+
+
+
+
+   <link rel="stylesheet" type="text/css" href="{% static 'css/create_drive.css' %}" /> 
+   <link rel="stylesheet" type="text/css" href="{% static 'css/single_drive.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'css/dashboard.css' %}" /> 
+
+  <!-- JavaScript -->
+  <script src="{% static 'js/CreateDrive.js' %}"></script>
+
+  <!-- <script src="{% static 'js/singledrive.js' %}"></script> -->
+
+
+  <!-- <script src="{% static 'js/delete_activity.js' %}"></script> -->
+
+</head>
+<body>
+
+  {% include 'sidebar.html' %}
+ 
+{% block content %}
+ {% endblock %} 
+  
+ 
+  
+</body>
+</html> 

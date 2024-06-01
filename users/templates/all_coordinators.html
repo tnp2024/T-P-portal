@@ -1,0 +1,131 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<style>
+    /* General styling */
+    .table-container {
+        width: 50%;  /* Adjusted width for better responsiveness */
+        margin-top: 100px;
+        margin-left: 280px;
+        font-family: 'Poppins', sans-serif;
+    }
+    h1 {
+        margin-left: 1px;
+    }
+    table {
+        width: 100%;  /* Adjusted width for better responsiveness */
+        border-collapse: collapse;
+        margin-bottom: 20px;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        font-family: 'Poppins', sans-serif;
+    }
+    th, td {
+        padding: 12px;
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+    }
+    th {
+        background-color: #2391ad;
+        color: white;
+    }
+    td {
+        background-color: #f8f9fa;
+    }
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+    @media (max-width: 600px) {
+        table {
+            font-size: 14px;
+        }
+    }
+    .index-column {
+        width: 60px;
+        font-weight: bold;
+    }
+    .delete-button {
+        background-color: #ff4d4d;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+    .delete-button:hover {
+        background-color: #ff1a1a;
+    }
+    button {
+    font-family: 'Poppins', sans-serif;
+
+    padding: 8px 16px;
+    margin-bottom: 10px;
+
+
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    /* border-radius: 30px; */
+    background-color: #63bbd1;
+    color: white;
+    /* White text */
+    font-size: 15px;
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    /* Transition background-color, color, and transform */
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* Add shadow for depth */
+}
+button:hover {
+    color: white;
+    background-color: #0f3243;
+
+    /* Add more pronounced upward movement on hover */
+}
+</style>
+
+<div class="table-container">
+    <h1>List of Coordinators</h1>
+    <a href="{% url 'register-coordinator' %}"><button id="create_activity">Register Coordinator</button></a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>#</th> <!-- Index column -->
+                <th>Coordinator ID</th>
+                <th>Name</th>
+                <th>Phone No</th>
+                <th>Email</th>
+                <th>Department</th>
+                <th>Personal Email</th>
+                <th>Institution</th>
+                <!-- <th>Actions</th> Action column -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for coordinator in coordinators %}
+            <tr>
+                <td class="index-column">{{ forloop.counter }}</td> <!-- Display index -->
+                <td>{{ coordinator.C_ID }}</td>
+                <td>{{ coordinator.NAME }}</td>
+                <td>{{ coordinator.PHONE_NO }}</td>
+                <td>{{ coordinator.EMAIL }}</td>
+                <td>{{ coordinator.department }}</td>
+                <td>{{ coordinator.PERSONAL_EMAIL }}</td>
+                <td>{{ coordinator.INSTITUTE }}</td>
+                <!-- <td>
+               
+                    <a href="" class="delete-button">Delete</a>
+                    
+                </td> -->
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

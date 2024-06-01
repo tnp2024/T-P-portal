@@ -1,0 +1,46 @@
+
+
+{% extends 'main.html' %}
+
+{% block content %}
+  <div class="edit_profile_card">
+    <h1 class="dropdown-btn">Edit Profile</h1>
+    <div class="edit_profile_card-body hidden">
+        <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          {% for field in form %}
+            <div class="form-group">
+              <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+              {{ field }}
+              {% if field.errors %}
+                <div class="error">{{ field.errors }}</div>
+              {% endif %}
+            </div>
+          {% endfor %}
+          <button type="submit" class="btn btn-submit">Submit</button>
+        </form>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const dropdownBtn = document.querySelector('.dropdown-btn');
+      const cardBody = document.querySelector('.edit_profile_card-body.hidden');
+
+      dropdownBtn.addEventListener('click', function () {
+          if (cardBody.style.display === 'block') {
+              cardBody.style.display = 'none';
+          } else {
+              cardBody.style.display = 'block';
+          }
+      });
+
+      // Close form when clicking outside
+      window.addEventListener('click', function (event) {
+          if (!dropdownBtn.contains(event.target) && !cardBody.contains(event.target)) {
+              cardBody.style.display = 'none';
+          }
+      });
+    });
+  </script>
+{% endblock %}

@@ -1,0 +1,163 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    {% load static %}
+    <style>
+    h1{
+        color: #19515f;
+        font-family: sans-serif;
+        margin-left: -29.5cm;
+    }    
+    .table-container {
+        margin-top: 100px; 
+        text-align: center; /* Center-align table and pagination */
+        width: 90%; /* Set width for the table container */
+        margin-left: 285px;
+        margin-bottom: auto;
+        font-family: 'Poppins', sans-serif;
+        overflow-x:hidden;
+
+    }
+
+    table {
+        width: 90%; /* Take up full width of the container */
+        overflow-y: auto; /* Enable vertical scrolling if table exceeds max height */
+        border-collapse: collapse;
+        font-size: small;
+        font-family: 'Poppins', sans-serif;
+        border-radius: 7px;
+
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #2391ad;
+        color: white;
+    }
+
+
+        /* Styling for buttons */
+        .approve-button, .deny-button {
+            padding: 8px 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        .approve-button {
+            background-color: #4caf50; /* Green color */
+            color: white;
+            border: none;
+            font-size: x-small;
+            margin-bottom: 2px;
+        }
+        .deny-button {
+            background-color: #f44336; /* Red color */
+            color: white;
+            border: none;
+            font-size: x-small;
+        }
+        .approve-button:hover, .deny-button:hover {
+            opacity: 0.9;
+        }
+        /* Pagination container styles */
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px;
+ /* Center pagination controls */
+        }
+        .pagination-link {
+            background-color: #63bbd1;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 3px;
+            text-decoration: none;
+        }
+        .pagination-link:hover{
+            color: white;
+    transform: translateY(-4px);
+    background-color: #0f3243;
+        }
+        .status-approved {
+            background-color: #ffffff; /* Green color */
+            color: rgb(20, 158, 10);
+        }
+        .status-denied {
+            background-color: #fffbfb; /* Red color */
+            color: rgb(227, 16, 16);
+        }
+    </style>
+<div class="table-container">
+    <h1> List of Requests</h1>
+    <table>
+        <tr>
+            <th>Index</th>
+            <th>Date</th>
+            <th>Student</th>
+            <th>PRN</th>
+            <th>Field Changed</th>
+            <th>Old Value</th>
+            <th>New Value</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+        {% for change in all_changes %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ change.created_at }}</td>
+                <td>{{ change.student.FIRST_NAME }} {{ change.student.LAST_NAME }}</td>
+                <td>{{ change.student.PRN }}</td>
+                <td>{{ change.field_changed }}</td>
+                <td>{{ change.old_value }}</td>
+                <td>{{ change.new_value }}</td>
+                <td class="{% if change.status == 'approved' %}status-approved{% elif change.status == 'denied' %}status-denied{% endif %}">
+                    {{ change.status }}
+                </td>
+                <td>
+                    {% if change.status == 'pending' %}
+                        <form method="post" action="{% url 'approve_profile_change' change.pk %}">
+                            {% csrf_token %}
+                            <button class="approve-button" type="submit">Approve</button>
+                        </form>
+                        <form method="post" action="{% url 'deny_profile_change' change.pk %}">
+                            {% csrf_token %}
+                            <button class="deny-button" type="submit">Deny</button>
+                        </form>
+                    {% endif %}
+                </td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="9">No changes found.</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <div class="pagination-container">
+
+    {% if all_changes.paginator.num_pages > 1 %}
+        <div class="pagination">
+            <span class="step-links">
+                {% if all_changes.has_previous %}
+                    <a href="?page=1" class="pagination-link">&laquo; first</a>
+                    <a href="?page={{ all_changes.previous_page_number }}" class="pagination-link">previous</a>
+                {% endif %}
+
+                <span class="current">
+                    Page {{ all_changes.number }} of {{ all_changes.paginator.num_pages }}.
+                </span>
+
+                {% if all_changes.has_next %}
+                    <a href="?page={{ all_changes.next_page_number }}" class="pagination-link">next</a>
+                    <a href="?page={{ all_changes.paginator.num_pages }}" class="pagination-link">end&raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+    </div>
+</div>    
+    {% endif %}
+{% endblock %}

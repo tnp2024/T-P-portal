@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+.drive_card {
+    background-color: rgba(245, 245, 245, 0.878);
+    color: black;
+    font-family: 'Poppins', sans-serif;
+    font-size: medium;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    margin: 90px auto;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 1cm;
+    max-width: 850px;
+    margin-left: 400px;
+}
+
+
+
+.form-group {
+    margin-bottom: 30px;
+    /* Increased margin bottom */
+}
+
+
+.form-group label {
+    display: block;
+    margin-bottom: 10px;
+    /* Increased margin bottom */
+    font-weight: bold;
+}
+
+.form-control {
+    width: 100%;
+    padding: 15px;
+    /* Increased padding */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.checkbox-group {
+    margin-bottom: 20px;
+}
+
+.checkbox-group input[type="checkbox"] {
+    display: none;
+}
+
+.checkbox-group label {
+    display: block;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+.checkbox-group label:before {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    border: 2px solid black;
+    border-radius: 3px;
+    vertical-align: middle;
+}
+
+.checkbox-group input[type="checkbox"]:checked+label:before {
+    background-color: black;
+    border-color: black;
+}
+
+.checkbox-group input[type="checkbox"]:checked+label:after {
+    content: "\2713";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    text-align: center;
+    line-height: 20px;
+    color: white;
+    background-color: black;
+    border-radius: 3px;
+    vertical-align: middle;
+}
+
+.btn-submit {
+    background-color: #0f3243;
+    /* Darker shade of yellow */
+    border: none;
+    color: white;
+    height: auto;
+    padding: 5px, 10px;
+    /* Increased padding */
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    /* Make the button a block-level element */
+    font-size: 18px;
+    /* Increased font size */
+    margin: 20px auto;
+    /* Center the button horizontally and add margin top */
+    border-radius: 5px;
+    cursor: pointer;
+    align-items: center;
+}
+
+
+.btn-submit:hover {
+    background-color: #63bbd1;
+    color: white;
+    cursor: pointer;
+}
+
+/* Custom scrollbar */
+.drive_card-body {
+    max-height: 475px;
+    /* Set maximum height for scrolling */
+    overflow-y: auto;
+    /* Enable vertical scrollbar */
+    color: #0f3243;
+
+}
+
+.dropdown-btn {
+    cursor: pointer;
+    color: white;
+    background-color: #0f3243;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px auto;
+    width: 80%;
+    max-width: 600px;
+    text-align: center;
+}
+
+.dropdown-btn:hover {
+
+    background-color: #63bbd1;
+    color: white;
+    cursor: pointer;
+
+}
+
+.drive_card-body {
+    display: none;
+}

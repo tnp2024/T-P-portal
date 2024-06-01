@@ -1,0 +1,9 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div class="exists_container">
+       
+        <p class ='exists'>You have already applied to this DRIVE</p>
+        <a href="{% url 'all-drives' %}" class="exists_button">OK</a>
+    </div>
+{% endblock  %}

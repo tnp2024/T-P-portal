@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TNP-Office User Registration</title>
+  <link rel="stylesheet" href="{% static 'css/registration.css' %}">  </head>
+<body>
+  <body>
+
+    <div class="background-wrapper">
+      <div class="reg_container">
+    
+        <div class="title-box">
+          <h2>Register a TNP-Office User here</h2>
+        </div>
+    
+        <form  method="POST">
+    
+          {% for field in user_form %}
+            <div class="reg-form-group">
+              <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+              {% csrf_token %}
+              {{field}}
+            </div>
+          {% endfor %}
+    
+          {% for field in tnpoffice_form %}
+
+            <div class="reg-form-group">
+              <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+              {% csrf_token %}
+              {{field}}
+            </div>
+          {% endfor %}
+    
+          <div class="register-btn">
+            <button type="submit" class="btn btn-primary">Register</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    
+
+</body>
+</html>

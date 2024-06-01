@@ -1,0 +1,79 @@
+
+{% extends 'main.html' %}
+
+{% block content %}
+
+  <div class="view-toggle">
+    <button id="toggleButton"><i class='bx bx-list-ul' ></i><span class="tooltip">Change View</span>
+
+    </button>
+  </div>
+<div class="card-container" id="cardContainer"> <!-- Correct class name to match CSS -->
+
+  {% for drive in alldrives %}
+  <div class="card">
+    <div class="img">
+      <img src="{{ drive.company_logo.url }}" alt="Company Logo" />
+    </div>
+    <div class="all-text">
+      <div class="name">{{ drive.title }}</div>
+      <div class="all_drives">Industry Type: {{ drive.industry_type }}</div>
+      <div class="text">Date: {{ drive.date }}</div>
+      <div class="btn">
+        <a href="{% url 'drive' drive.drive_id %}">Read more</a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<div class="list-container" id="listContainer" style="display: none;">
+  {% for drive in alldrives %}
+  <div class="list-item">
+    <div class="list-item-left">
+      <div class="logo">
+        <img src="{{ drive.company_logo.url }}" alt="Company Logo">
+      </div>
+      <div class="dates">
+        <div class="drive-title">{{ drive.title }}</div>
+        <div class="post-date">Posted on: {{ drive.creation_date }} </div>
+        <div class="post-date">Date of Drive: {{drive.date}} | Last Date : {{ drive.application_last_date }}</div>
+
+      </div>
+    </div>
+    <div class="list-item-right">
+            <div class="list-read-more">
+        <a href="{% url 'drive' drive.drive_id %}">Read more</a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const toggleButton = document.getElementById("toggleButton");
+    const cardContainer = document.getElementById("cardContainer");
+    const listContainer = document.getElementById("listContainer");
+  
+    toggleButton.addEventListener("click", function() {
+      if (cardContainer.style.display === "none") {
+        // Switching to card view
+        cardContainer.style.display = "grid";
+        listContainer.style.display = "none";
+      } else {
+        // Switching to list view
+        cardContainer.style.display = "none";
+        listContainer.style.display = "block";
+      }
+    });
+  });
+  
+
+</script>
+
+
+
+
+{% endblock %}
+

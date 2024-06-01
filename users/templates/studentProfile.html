@@ -1,0 +1,178 @@
+{% extends 'main.html' %}
+{% block content %}
+{% load static %}
+
+<div class="profileContainer">
+
+  <!-- Student Profile -->
+  <div class="student-profile">
+
+    <div class="personalDetails">
+      {% if request.user.user_type == 'Student' and has_pending_requests %}
+      <div class="alert alert-danger mt-4" role="alert" style="padding: 20px; color: white; background-color: red; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 16px; font-weight: bold;">
+        Your request for changes in profile has been sent to the designated coordinator.
+      </div>
+      {% endif %}
+
+      <div class="pr-card">
+        <div class="pr-card-header">
+          {% if student.Profile_photo %}
+          <img class="profile_img" src="{{ student.Profile_photo.url }}" alt="Student DP">
+          {% else %}
+          <img src="{% static 'images/user-default.png' %}" alt="Student DP" />
+          {% endif %}
+        </div>
+        <div class="pr-card-body">
+          <p class="mb-0"><strong class="pr-1">NAME:</strong> {{ student.FIRST_NAME }} {{ student.MIDDLE_NAME }} {{ student.LAST_NAME }}</p>
+          <p class="mb-0"><strong class="pr-1">PRN:</strong> {{ student.PRN }}</p>
+          <p class="mb-0"><strong class="pr-1">Department:</strong> {{ student.department }}</p>
+          <p class="mb-0"><strong class="pr-1">DOB:</strong> {{ student.DOB }}</p>
+          <p class="mb-0"><strong class="pr-1">Age:</strong> {{ student.AGE }}</p>
+          <p class="mb-0"><strong class="pr-1">Gender:</strong> {{ student.get_GENDER_display }}</p>
+          <p class="mb-0"><strong class="pr-1">Graduation Year:</strong> {{ student.Pass_out_Year }}</p>
+          <p class="mb-0"><strong class="pr-1">Languages Known:</strong> {{ student.Languages }}</p>
+          <p class="mb-0"><strong class="pr-1">Major Projects:</strong> {{ student.major_projects }}</p>
+          <p class="mb-0"><strong class="pr-1">Minor Projects:</strong> {{ student.minor_projects }}</p>
+          <hr>
+          <h3>Documents</h3>
+          <div class="document">
+            <p class="mb-0"><strong class="pr-1">Xth Marksheet:</strong>
+              {% if student.Xth_marksheet %}
+              <a href="{{ student.Xth_marksheet.url }}" target="_blank">{{ student.Xth_marksheet.name }}</a>
+              {% else %}
+              <span>No Xth Marksheet available</span>
+              {% endif %}
+            </p>
+          </div>
+          {% if student.XIIth_marksheet %}
+          <div class="document">
+            <p class="mb-0"><strong class="pr-1">XIIth Marksheet:</strong>
+            <a href="{{ student.XIIth_marksheet.url }}" target="_blank">{{ student.XIIth_marksheet.name }}</a>
+            </p>
+          </div>
+          {% endif %}
+          {% if student.Diploma_Firstyear_marksheet %}
+          <div class="document">
+            <p class="mb-0"><strong class="pr-1">Diploma First Year Marksheet:</strong>
+            <a href="{{ student.Diploma_Firstyear_marksheet.url }}" target="_blank">{{ student.Diploma_Firstyear_marksheet.name }}</a>
+            </p>
+          </div>
+          {% endif %}
+          {% if student.sem1_marksheet %}
+          <div class="document">
+            <p class="mb-0"><strong class="pr-1">SEM 1 Marksheet:</strong>
+            <a href="{{ student.sem1_marksheet.url }}" target="_blank">{{ student.sem1_marksheet.name }}</a>
+            </p>
+          </div>
+          {% endif %}
+          {% if student.sem2_marksheet %}
+          <div class="document">
+            <p class="mb-0"><strong class="pr-1">SEM 2 Marksheet:</strong>
+            <a href="{{ student.sem2_marksheet.url }}" target="_blank">{{ student.sem2_marksheet.name }}</a>
+            </p>
+          </div>
+          {% endif %}
+          {% if student.sem5_marksheet %}
+          <div class="document">
+            <p class="mb-0"><strong class="pr-1">SEM 5 Marksheet:</strong>
+            <a href="{{ student.sem5_marksheet.url }}" target="_blank">{{ student.sem5_marksheet.name }}</a>
+            </p>
+          </div>
+          {% endif %}
+          {% if student.sem7_marksheet %}
+          <div class="document">
+            <p class="mb-0"><strong class="pr-1">SEM 7 Marksheet:</strong>
+            <a href="{{ student.sem7_marksheet.url }}" target="_blank">{{ student.sem7_marksheet.name }}</a>
+            </p>
+          </div>
+          {% endif %}
+          
+
+        </div>
+      </div>
+    </div>
+    
+    <div class="contactDetails">
+      <div class="pr-card">
+        <div class="pr-card-body">
+
+          <div class="btn-group">
+            {% if request.user.is_authenticated and request.user.user_type == 'Student' %}
+            <form action="{% url 'edit_student_profile' student_prn=student.PRN %}">
+              <button class="edit-link" type="submit">Edit Profile</button>
+            </form>
+            <form action="{% url 'upload_files' student_prn=student.PRN %}">
+              <button class="edit-link" type="submit">Upload Files</button>
+            </form>
+            {% endif %}
+            {% if request.user.is_authenticated and request.user.user_type != 'Student' %}
+            <button class="edit-link">
+              <a href="{% url 'my_applications' student_prn=student.PRN %}" style="text-decoration: none; color: inherit;">Applications</a>
+            </button>
+            {% endif %}
+          </div>
+         
+
+          <h3>Contact Details</h3>
+
+          
+          <div class="contact-info">
+            <p class="mb-0"><strong class="pr-1">Email:</strong> {{ student.EMAIL }}</p>
+            <p class="mb-0"><strong class="pr-1">Personal Email:</strong> {{ student.PERSONAL_EMAIL }}</p>
+            <p class="mb-0"><strong class="pr-1">Mobile No.:</strong> {{ student.MOBILE_NO }}</p>
+            <p class="mb-0"><strong class="pr-1">Alternate Mobile No.:</strong> {{ student.ALT_Mobile_NO }}</p>
+            <p class="mb-0"><strong class="pr-1">Local Address:</strong> {{ student.LOCAL_ADDRS }}</p>
+            <p class="mb-0"><strong class="pr-1">Permanent Address:</strong> {{ student.PERM_ADDRS }}</p>
+            <p class="mb-0"><strong class="pr-1">Native Place:</strong> {{ student.Native_Place }}</p>
+          </div>
+        </div>
+        <hr>
+        <h3 class="mb-0">Pre-College Academics</h3>
+        <div class="pr-card-body">
+          <div class="pre-college-info">
+            <p class="mb-0"><strong class="pr-1">X-Percentage:</strong> {{ student.X_Percentage }}</p>
+            <p class="mb-0"><strong class="pr-1">X-Board:</strong> {{ student.X_board }}</p>
+            <p class="mb-0"><strong class="pr-1">X-Year of Passing:</strong> {{ student.X_year_of_passing }}</p>
+            {% if student.XII_Percentage %}
+            <p class="mb-0"><strong class="pr-1">XII-Percentage:</strong> {{ student.XII_Percentage }}</p>
+            <p class="mb-0"><strong class="pr-1">XII-Board:</strong> {{ student.XII_board }}</p>
+            <p class="mb-0"><strong class="pr-1">XII-Year of Passing:</strong> {{ student.XII_year_of_passing }}</p>
+            {% else %}
+            <p class="mb-0"><strong class="pr-1">Diploma-College:</strong> {{ student.Diploma_college }}</p>
+            <p class="mb-0"><strong class="pr-1">Diploma-Percentage:</strong> {{ student.Diploma_percentage }}</p>
+            <p class="mb-0"><strong class="pr-1">Diploma-Branch:</strong> {{ student.Diploma_branch }}</p>
+            <p class="mb-0"><strong class="pr-1">Diploma-Year of Passing:</strong> {{ student.Diploma_year_of_passing }}</p>
+            {% endif %}
+          </div>
+        </div>
+        <hr>
+        <h3>College Academics</h3>
+        <div class="pr-card-body">
+          <div class="college-academics-info">
+            <p class="profile-info-item"><strong class="pr-1">Admission Type:</strong> {{ student.Admission_Type }}</p>
+            <p class="profile-info-item"><strong class="pr-1">Sem-1 SGPA:</strong> {{ student.SEM_1_sgpa }}</p>
+            <p class="profile-info-item"><strong class="pr-1">Sem-2 SGPA:</strong> {{ student.SEM_2_sgpa }}</p>
+            <p class="profile-info-item"><strong class="pr-1">Sem-3 SGPA:</strong> {{ student.SEM_3_sgpa }}</p>
+            <p class="profile-info-item"><strong class="pr-1">Sem-4 SGPA:</strong> {{ student.SEM_4_sgpa }}</p>
+            <p class="profile-info-item"><strong class="pr-1">Sem-5 SGPA:</strong> {{ student.SEM_5_sgpa }}</p>
+            <p class="profile-info-item"><strong class="pr-1">Sem-6 SGPA:</strong> {{ student.SEM_6_sgpa }}</p>
+            <p class="profile-info-item"><strong class="pr-1">Sem-7 SGPA:</strong> {{ student.SEM_7_sgpa }}</p>
+            <p class="profile-info-item"><strong class="pr-1">Sem-8 SGPA:</strong> {{ student.SEM_8_sgpa }}</p>
+            <p class="profile-info-item"><strong class="pr-1">Average CGPA:</strong> {{ student.AVG_TILL_SEM_cgpa }}</p>
+            <p class="profile-info-item"><strong class="pr-1">Average Percentage:</strong> {{ student.AVG_TILL_SEM_percentage }}</p>
+            <p class="profile-info-item"><strong class="pr-1">Live-Backlog:</strong> {{ student.Live_backlogs }}</p>
+            <p class="profile-info-item"><strong class="pr-1">Dead-Backlog:</strong> {{ student.Dead_backlogs }}</p>
+            <p class="profile-info-item"><strong class="pr-1">Year Gap:</strong> {{ student.Year_gap }}</p>
+            <p class="profile-info-item"><strong class="pr-1">Preference-1:</strong> {{ student.Preference_1 }}</p>
+            <p class="profile-info-item"><strong class="pr-1">Preference-2:</strong> {{ student.Preference_2 }}</p>
+            <p class="profile-info-item"><strong class="pr-1">Preference-3:</strong> {{ student.Preference_3 }}</p>
+            <p class="profile-info-item"><strong class="pr-1">Placed:</strong> {{ student.Placed }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}
