@@ -1,0 +1,437 @@
+.sidebar-container {
+    display: flex;
+}
+
+
+.search-container {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.search-container input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+    font-size: 16px;
+    width: 70%;
+}
+
+.search-container button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: 1px solid #007bff;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.search-container button:hover {
+    background-color: #63bbd1;
+    border: 1px solid #0056b3;
+}
+
+/* Style the search icon */
+.search-container button i {
+    font-size: 20px;
+}
+
+.horizontal-bar {
+    position: absolute;
+    top: 30px;
+    left: 35cm;
+    right: 4cm;
+    /* Adjust the distance from the right edge */
+    width: 5cm;
+    /* The width of the bar will be the full width minus 10cm */
+    height: 50px;
+    display: flex;
+    background-color: #0f3243;
+    border-radius: 15px 15px 15px 15px;
+
+}
+
+.erp-logout-links {
+    display: flex;
+    align-items: center;
+}
+
+.erp-logout-links a {
+    color: #fff;
+    /* Text color */
+    text-decoration: none;
+    /* Remove underline */
+    display: flex;
+    /* Make it a flex container */
+    align-items: center;
+    /* Center align vertically */
+    margin-left: 20px;
+    /* Adjust spacing between links */
+}
+
+.erp-logout-links a:hover .icon,
+.erp-logout-links a:hover .nav-text {
+    color: #63bbd1;
+    /* Change color on hover */
+}
+
+.profile-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    height: 150px;
+    /* Set a fixed height for the profile container */
+    border-radius: 0 20px 20px 0;
+    background-color: #0f3243;
+}
+
+
+.profile-picture {
+    width: 85px;
+    /* Adjust size as needed */
+    height: 85px;
+    /* Adjust size as needed */
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50px;
+}
+
+.profile-info {
+    margin-left: 100px;
+    /* Ensure some space for profile picture */
+}
+
+.profile-info .name {
+    font-size: 15px;
+    font-weight: 600;
+    color: white;
+}
+
+.profile-info .profession {
+    font-size: 15px;
+    color: #f4eded;
+}
+
+.profile-info .department {
+    font-size: 12px;
+    color: #f4eded;
+}
+
+/* Google Font Import - Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+/*  Sidebar  */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 250px;
+    padding: 10px 14px;
+    background: #0f3243;
+    transition: var(--tran-05);
+    z-index: 100;
+    /* Custom shape for intersection */
+    border-radius: 0 20px 20px 0;
+    font-family: 'Poppins', sans-serif;
+
+}
+
+.sidebar.close {
+    width: 88px;
+}
+
+/*  Reusable code  */
+.sidebar li {
+    height: 50px;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.sidebar header .image,
+.sidebar .icon {
+    min-width: 60px;
+    border-radius: 6px;
+}
+
+.sidebar .icon {
+    min-width: 60px;
+    border-radius: 6px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: rgba(234, 236, 239, 0.742);
+}
+
+.sidebar .text {
+    color: white;
+    transition: var(--tran-03);
+}
+
+.sidebar .text {
+    font-size: 17px;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 1;
+}
+
+.sidebar.close .text {
+    opacity: 0;
+}
+
+
+.sidebar header {
+    position: relative;
+}
+
+.sidebar header .image-text {
+    display: flex;
+    align-items: center;
+}
+
+.sidebar header .logo-text {
+
+    display: flex;
+    flex-direction: column;
+}
+
+header .image-text .name {
+
+    margin-top: 2px;
+    font-size: 10px;
+    font-weight: 400;
+}
+
+header .image-text .profession {
+    font-size: 16px;
+    margin-top: -2px;
+    display: block;
+}
+
+.sidebar header .image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar header .image img {
+    width: 40px;
+    border-radius: 6px;
+}
+
+.sidebar header .toggle {
+    position: absolute;
+    top: 50%;
+    right: -25px;
+    transform: translateY(-50%) rotate(180deg);
+    height: 25px;
+    width: 25px;
+    background-color: var(--primary-color);
+    color: var(--sidebar-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    cursor: pointer;
+    transition: var(--tran-05);
+}
+
+body.dark .sidebar header .toggle {
+    color: var(--text-color);
+}
+
+.sidebar.close .toggle {
+    transform: translateY(-50%) rotate(0deg);
+}
+
+.sidebar .menu {
+    margin-top: 60px;
+}
+
+.sidebar .menu-links .nav-link.active a {
+    background-color: #63bbd132;
+    /* Change background color of active link */
+}
+
+.sidebar .menu-links .nav-link.active .icon,
+.sidebar .menu-links .nav-link.active .text {
+    color: #63bbd1;
+    ;
+    /* Change text color of active link */
+}
+
+
+
+
+.sidebar li a {
+    list-style: none;
+    height: 100%;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: var(--tran-03);
+
+}
+
+.sidebar li a:hover {
+    background-color: #63bbd143;
+    ;
+}
+
+.sidebar li a:hover .icon,
+.sidebar li a:hover .text {
+    color: #63bbd1;
+    ;
+}
+
+body.dark .sidebar li a:hover .icon,
+body.dark .sidebar li a:hover .text {
+    color: var(--text-color);
+}
+
+.sidebar .menu-bar {
+    height: calc(100% - 55px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.menu-bar::-webkit-scrollbar {
+    display: none;
+}
+
+.sidebar .menu-bar .mode {
+    border-radius: 6px;
+    background-color: var(--primary-color-light);
+    position: relative;
+    transition: var(--tran-05);
+}
+
+.menu-bar .mode .sun-moon {
+    height: 50px;
+    width: 60px;
+}
+
+.mode .sun-moon i {
+    position: absolute;
+}
+
+.mode .sun-moon i.sun {
+    opacity: 1;
+}
+
+body.dark .mode .sun-moon i.sun {
+    opacity: 1;
+}
+
+body.dark .mode .sun-moon i.moon {
+    opacity: 1;
+}
+
+/* .menu-bar .toggle-switch {
+    position: absolute;
+    right: 0;
+    height: 100%;
+    min-width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: rgba(150, 196, 243, 0.742);
+
+} */
+
+.toggle-switch .switch {
+    position: relative;
+    height: 22px;
+    width: 40px;
+    border-radius: 25px;
+    background-color: rgba(77, 148, 218, 0.742);
+    transition: var(--tran-05);
+}
+
+.switch::before {
+    content: '';
+    position: absolute;
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    background-color: rgba(77, 148, 218, 0.742);
+    transition: var(--tran-04);
+}
+
+body.dark .switch::before {
+    left: 20px;
+    background-color: rgba(77, 148, 218, 0.742);
+}
+
+.home {
+    position: absolute;
+    top: 0;
+    top: 0;
+    left: 250px;
+    height: 100vh;
+    width: calc(100% - 250px);
+    transition: var(--tran-05);
+}
+
+.home .text {
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--text-color);
+    padding: 12px 60px;
+}
+
+.sidebar.close .home {
+    left: 78px;
+    height: 100vh;
+    width: calc(100% - 78px);
+}
+
+body.dark .home .text {
+    color: var(--text-color);
+}

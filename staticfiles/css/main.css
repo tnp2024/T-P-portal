@@ -1,0 +1,35 @@
+/* Reset CSS (optional, consider using a CSS reset library) */
+/* * {
+    box-sizing: border-box;
+} */
+
+/* Body */
+.body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #0f3243
+}
+
+/* Main container */
+
+
+/* Main content area */
+/* .main-container {
+    margin-bottom: 0px;
+    width: 100%;
+    background-color: #fff9f9;
+    height: 100%; */
+
+/* Adjust padding as needed */
+/* Other styles for the content area */
+/* } */
+
+/* Sidebar */
+@media only screen and (min-width: 769px) and (max-width: 1200px) {
+    /* Styles specific to medium and large laptops */
+    /* Adjustments for medium and large laptops go here */
+
+    /* Example of adjustments for medium and large laptops */
+    .container {
+        width: 70%;
+    }
+}

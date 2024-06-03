@@ -1,0 +1,150 @@
+h3 {
+    text-align: start;
+    padding: 2px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-family: 'Poppins', sans-serif;
+
+}
+
+.btn-group {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.edit-link {
+
+    padding: 4px;
+    background-color: #0f3243;
+    color: #ffffff;
+    border-radius: 8px;
+    width: 120px;
+    height: 40px;
+    font-size: medium;
+    border: white;
+    cursor: pointer;
+    display: inline-block;
+    gap: 10px;
+}
+
+.edit-link:hover {
+    background-color: #63bbd1;
+}
+
+
+
+.profileContainer {
+    margin-top: 100px;
+    /* padding: 50px; */
+    margin-left: 300px;
+    font-family: 'Poppins', sans-serif;
+    /* overflow-x: hidden; */
+    overflow-y: scroll;
+
+}
+
+/* .pr-card 
+
+    border-radius: 0.25rem;
+
+} */
+
+.student-profile .pr-card {
+    border-radius: 50px;
+    color: #63bbd1;
+    padding: 10px;
+    /* max-width: 700px; */
+    box-sizing: border-box;
+}
+
+.student-profile .pr-card .pr-card-header {
+    /* display: flex; */
+    /* Center horizontally */
+    text-align: center;
+    /* Center vertically */
+    height: 150px;
+
+}
+
+.student-profile .pr-card .pr-card-header .profile_img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border: 3px solid #67b3b1;
+    border-radius: 50%;
+
+    /* Center horizontally */
+
+}
+
+.student-profile .pr-card h3 {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.student-profile .pr-card p {
+    font-size: 16px;
+    color: black;
+    font-weight: bolder;
+
+
+}
+
+.pr-1 {
+    font-weight: lighter;
+    margin-right: 20px;
+}
+
+.student-profile .profile-table th,
+.student-profile .profile-table td {
+    font-size: 14px;
+    padding: 2px;
+    color: #000;
+    align-items: start;
+}
+
+/* profile.css */
+
+.container {
+    display: flex;
+    justify-content: space-between;
+
+    /* Pushes .col-lg-8 to the right */
+
+}
+
+.contactDetails {
+    /* margin-top: 5px; */
+    /* Pushes the element to the bottom */
+    position: absolute;
+
+    overflow-y: visible;
+    width: 650px;
+    margin-left: 450px;
+    margin-bottom: 30px;
+    /* overflow: visible; */
+    border-radius: 10px;
+    box-shadow: 1px 0 12px 4px #587bb0c2;
+    /* border: 3px solid rgba(185, 185, 185, 0.901); */
+}
+
+.personalDetails {
+    /* margin-top: 5px; */
+    position: absolute;
+    margin-right: 80px;
+    margin-left: 5px;
+    width: 400px;
+    border-radius: 10px;
+    box-shadow: 1px 0 12px 4px #587bb0c2;
+    /* border: 1px solid rgba(185, 185, 185, 0.901); */
+
+}
+
+.contactDetails.pr-card-body {
+    align-items: start;
+    /* overflow-y: scroll; */
+    background-color: rgb(159, 215, 251, 0.5);
+
+
+}

@@ -1,0 +1,67 @@
+/* Define CSS styles for the table with class "application-table" */
+
+.application-table-container {
+
+    width: 1900px;
+    margin-top: 100px;
+    margin-left: 70px;
+    font-family: 'Poppins', sans-serif;
+
+}
+
+h1 {
+    margin-left: 6cm;
+    color: #19515f;
+    font-family: sans-serif;
+    margin-bottom: 10px;
+
+}
+
+.application-table {
+    /* Reduce the margin-top */
+    border-collapse: collapse;
+    width: 1200px;
+    height: auto;
+    table-layout: auto;
+    /* Reduce the width */
+    margin-left: 6cm;
+    margin-bottom: 20px;
+
+    /* Reduce the margin-left */
+    /* table-layout: 10px; Remove this line */
+    border: 1px;
+    border-radius: 7px;
+    overflow: hidden;
+    color: var(--text-color-light-db);
+    background-color: var(--bg-color-light);
+    font-family: 'Poppins', sans-serif;
+
+}
+
+.application-table th,
+.application-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    font-size: small;
+    font-weight: lighter;
+    text-align: left;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+
+}
+
+.application-table th {
+    background-color: #2391ad;
+    /* Light gray background for headers */
+    color: rgb(255, 252, 252);
+    font-weight: bold;
+}
+
+.application-table tr:nth-child(even) {
+    background-color: #f5f5f54d;
+    /* Alternate background color for even rows */
+}
+
+.application-table tr:hover {
+    background-color: #83c6d7a0;
+    cursor: pointer;
+}
