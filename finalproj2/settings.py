@@ -14,6 +14,18 @@ from pathlib import Path,os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+import environ
+
+env = environ.Env()
+environ.Env.read_env()
+
+
+
+
+
+
+
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -143,6 +155,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = "users.CustomUser"
+
 AUTHENTICATION_BACKENDS = [
     'users.authentication.EmailBackend',  # Assuming 'users' is the name of your app
      'django.contrib.auth.backends.ModelBackend',
@@ -153,3 +166,22 @@ EMAIL_PORT = 587  # Port for SMTP server (587 for TLS)
 EMAIL_HOST_USER = 'dhruvdeshpande21@gmail.com'  # Your email address
 EMAIL_HOST_PASSWORD =  'niye cgcg xrdt ejzl'
 EMAIL_USE_TLS = True  # Use TLS encryption
+
+
+
+import dj_database_url
+
+
+import os
+import dj_database_url
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
+
+# Database configuration
+DATABASES = {
+    'default': dj_database_url.config(
+        default=os.getenv('DATABASE_URL')
+    )
+}
