@@ -166,8 +166,6 @@ EMAIL_USE_TLS = True  # Use TLS encryption
 
 
 
-import dj_database_url
-
 
 import os
 import dj_database_url
