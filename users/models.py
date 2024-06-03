@@ -5,34 +5,7 @@ from django.contrib.auth.models import AbstractUser
 
 
 
-from django.contrib.auth.models import BaseUserManager
 
-class CustomUserManager(BaseUserManager):
-    def create_superuser(self, email, password, **extra_fields):
-        """
-        Create and return a superuser with the given email and password.
-        """
-        if not email:
-            raise ValueError('The Email field must be set')
-        
-        email = self.normalize_email(email)
-        extra_fields.setdefault('is_staff', True)
-        extra_fields.setdefault('is_superuser', True)
-
-        return self._create_user(email, password, **extra_fields)
-
-    def _create_user(self, email, password, **extra_fields):
-        """
-        Create and return a regular user with the given email and password.
-        """
-        if not email:
-            raise ValueError('The Email field must be set')
-
-        email = self.normalize_email(email)
-        user = self.model(email=email, **extra_fields)
-        user.set_password(password)
-        user.save(using=self._db)
-        return user
 
 class CustomUser(AbstractUser):
 
@@ -224,18 +197,7 @@ from django.db import models
 from django.utils import timezone
 from datetime import timedelta
 
-class OTP(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    code = models.CharField(max_length=6)
-    created_at = models.DateTimeField(auto_now_add=True)
 
-    def generate_code(self):
-        self.code = ''.join(random.choices(string.digits, k=6))
-        self.created_at = timezone.now()  # Use timezone-aware datetime
-        self.save()
-
-    def is_valid(self):
-        return self.created_at >= timezone.now() - timedelta(minutes=10)
 
 
 
