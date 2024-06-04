@@ -1,15 +1,6 @@
 from pathlib import Path
 import os
-import dj_database_url
-from dotenv import load_dotenv
-import environ
 
-# Load environment variables from .env file
-load_dotenv()
-
-# Initialize environment variables
-env = environ.Env()
-environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -70,16 +61,13 @@ TEMPLATES = [
 WSGI_APPLICATION = 'finalproj2.wsgi.application'
 
 # Database configuration
-DATABASES = {
-    'default': dj_database_url.parse('postgres://productiondatabase_phle_user:84x7ufjEsKOsiZsNSykPZ7ra73gSOxKq@dpg-cpfba7dds78s73998h20-a.singapore-postgres.render.com/productiondatabase_phle')
-}
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 
 
