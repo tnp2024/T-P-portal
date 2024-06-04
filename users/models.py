@@ -92,7 +92,7 @@ class Student(models.Model):
     Admission_Type = models.CharField(max_length=255, null=True, blank=True)
     YEAR_CHOICES = [(str(year), str(year)) for year in range(2020, 2031)]
     Pass_out_Year = models.CharField(max_length=10, choices=YEAR_CHOICES, null=True, blank=True)
-    department = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True)   
+    department = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True,blank=True)   
     SEM_1_sgpa = models.DecimalField(max_digits=4, decimal_places=2, null=True, blank=True)
     sem1_marksheet = models.FileField(upload_to='documents/Sem1', null=True, blank=True)
     SEM_2_sgpa = models.DecimalField(max_digits=4, decimal_places=2, null=True, blank=True)
