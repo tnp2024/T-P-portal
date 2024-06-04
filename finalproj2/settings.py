@@ -71,7 +71,7 @@ WSGI_APPLICATION = 'finalproj2.wsgi.application'
 
 # Database configuration
 DATABASES = {
-    'default': dj_database_url.parse(env('DATABASE_URL'))
+    'default': dj_database_url.parse('postgres://productiondatabase_phle_user:84x7ufjEsKOsiZsNSykPZ7ra73gSOxKq@dpg-cpfba7dds78s73998h20-a.singapore-postgres.render.com/productiondatabase_phle')
 }
 
 # DATABASES = {
@@ -80,6 +80,11 @@ DATABASES = {
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+
+
+
+
+
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
