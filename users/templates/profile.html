@@ -7,7 +7,7 @@
             <div class="coordinator-pr-card">
                 <div class="coordinator-pr-card-header">
                     {% if coordinator.Profile_photo %}
-                        <img class="co_profile_img" src="{{ coordinator.Profile_photo.url }}" alt="Coordinator DP">
+                        <img class="co_profile_img" src="{{ coordinator.PROFILE_PHOTO.url }}" alt="Coordinator DP">
                     {% else %}
                         <img src="{% static 'images/user-default.png.' %}" alt="Coordinator DP" />
                     {% endif %}
@@ -31,7 +31,7 @@
                         <div class="coordinator-pr-card">
                             <div class="coordinator-pr-card-header">
                                 {% if tnpoffice.Profile_photo %}
-                                    <img class="co_profile_img" src="{{ tnpoffice.Profile_photo.url }}" alt="TNP Office DP">
+                                    <img class="co_profile_img" src="{{ tnpoffice.PROFILE_PHOTO.url }}" alt="TNP Office DP">
                                 {% else %}
                                     <img src="{% static 'images/user-default.png.' %}" alt="TNP Office DP" />
                                 {% endif %}
