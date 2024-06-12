@@ -40,12 +40,7 @@
     text-align: center;
 }
 
-.student-table th {
-    background-color: #63bbd1;
-    /* Light gray background for headers */
-    color: black;
-    font-weight: bold;
-}
+
 
 .student-table tr:nth-child(even) {
     background-color: #f5f5f54d;
@@ -99,8 +94,7 @@
 .student-table td {
     /* border: .5px solid rgba(189, 209, 230, 0.946); */
     /* padding: 5px; */
-    font-size: small;
-    font-weight: lighter;
+
     /* text-align: center; */
 
     padding: 12px;
@@ -110,9 +104,10 @@
 
 .student-table th {
     background-color: #2391ad;
-    /* Light gray background for headers */
-    color: black;
+    color: white;
+    font-family: 'poppins', sans-serif;
     font-weight: bold;
+    font-size: medium;
 }
 
 
@@ -137,7 +132,7 @@
 .student-button {
     text-align: center;
     margin-top: 10px;
-    background-color: #63bbd1;
+    background-color: #2391ad;
     color: white;
     padding: 8px 16px;
     border-radius: 4px;
@@ -161,6 +156,10 @@
     /* Horizontally center the items */
     margin-top: 20px;
     display: flex;
+}
+
+.student-table td {
+    font-size: medium;
 }
 
 /* General styling

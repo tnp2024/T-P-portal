@@ -78,6 +78,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    font-size: small;
 }
 
 .btn {
@@ -179,24 +180,28 @@
 
 .view-toggle {
     position: relative;
-    left: 8.5cm;
+    left: 8cm;
     transform: translateX(-50%);
     cursor: pointer;
     text-align: center;
     margin-top: 120px;
+    margin-bottom: 10px;
     border-radius: 50px;
+    height: 10px;
+    width: 20px;
 }
 
 .view-toggle button {
     background-color: #0f3243;
     color: white;
-    padding: 8px 16px;
+    padding: 4px 8px;
     border-radius: 10px;
     text-decoration: none;
     pointer-events: auto;
     border: none;
     cursor: pointer;
     font-size: 5px;
+
 }
 
 
@@ -248,4 +253,22 @@
     background-color: #0f3243;
     color: white;
     cursor: pointer;
+}
+
+
+
+.status-text {
+    font-weight: bold;
+}
+
+.status-text.upcoming {
+    color: rgba(255, 183, 0, 0.731);
+}
+
+.status-text.active {
+    color: rgba(0, 255, 0, 0.6);
+}
+
+.status-text.terminated {
+    color: rgba(255, 0, 0, 0.6);
 }

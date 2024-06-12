@@ -1,25 +1,23 @@
-
 {% extends 'main.html' %}
 
 {% block content %}
 
-  <div class="view-toggle">
-    <button id="toggleButton"><i class='bx bx-list-ul' ></i><span class="tooltip">Change View</span>
+<div class="view-toggle">
+    <button id="toggleButton"><i class='bx bx-list-ul'></i><span class="tooltip">Change View</span></button>
+</div>
 
-    </button>
-  </div>
-<div class="card-container" id="cardContainer"> <!-- Correct class name to match CSS -->
-
+<div class="card-container" id="cardContainer">
   {% for drive in alldrives %}
-  <div class="card">
+  <div class="card" data-status="{{ drive.drive_status }}">
     <div class="img">
       <img src="{{ drive.company_logo.url }}" alt="Company Logo" />
     </div>
     <div class="all-text">
       <div class="name">{{ drive.title }}</div>
       <div class="all_drives">Industry Type: {{ drive.industry_type }}</div>
-      <div class="text">Date: {{ drive.date }}</div>
-      <div class="btn">
+      <div class="text">Date: {{ drive.date }}  | <span class="status-text {{ drive.drive_status | lower }}">{{ drive.drive_status }}</span></div>
+
+      <div class="btn btn-shadow">
         <a href="{% url 'drive' drive.drive_id %}">Read more</a>
       </div>
     </div>
@@ -29,20 +27,19 @@
 
 <div class="list-container" id="listContainer" style="display: none;">
   {% for drive in alldrives %}
-  <div class="list-item">
+  <div class="list-item" data-status="{{ drive.drive_status }}">
     <div class="list-item-left">
       <div class="logo">
         <img src="{{ drive.company_logo.url }}" alt="Company Logo">
       </div>
       <div class="dates">
         <div class="drive-title">{{ drive.title }}</div>
-        <div class="post-date">Posted on: {{ drive.creation_date }} </div>
-        <div class="post-date">Date of Drive: {{drive.date}} | Last Date : {{ drive.application_last_date }}</div>
-
+        <div class="post-date">Posted on: {{ drive.creation_date }}</div>
+        <div class="post-date">Date of Drive: {{ drive.date }} | Last Date: {{ drive.application_last_date }}  |  <span class="status-text {{ drive.drive_status | lower }}">{{ drive.drive_status }}</span></div>
       </div>
     </div>
     <div class="list-item-right">
-            <div class="list-read-more">
+      <div class="list-read-more list-read-more-shadow">
         <a href="{% url 'drive' drive.drive_id %}">Read more</a>
       </div>
     </div>
@@ -51,29 +48,58 @@
 </div>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
+ document.addEventListener("DOMContentLoaded", function() {
     const toggleButton = document.getElementById("toggleButton");
     const cardContainer = document.getElementById("cardContainer");
     const listContainer = document.getElementById("listContainer");
-  
-    toggleButton.addEventListener("click", function() {
-      if (cardContainer.style.display === "none") {
-        // Switching to card view
+
+    // Check if the user has a stored preference for the view
+    const storedView = localStorage.getItem("viewPreference");
+
+    if (storedView === "card") {
         cardContainer.style.display = "grid";
         listContainer.style.display = "none";
-      } else {
-        // Switching to list view
+    } else {
         cardContainer.style.display = "none";
         listContainer.style.display = "block";
-      }
+    }
+
+    toggleButton.addEventListener("click", function() {
+        if (cardContainer.style.display === "none") {
+            cardContainer.style.display = "grid";
+            listContainer.style.display = "none";
+            // Store the user's preference for card view
+            localStorage.setItem("viewPreference", "card");
+        } else {
+            cardContainer.style.display = "none";
+            listContainer.style.display = "block";
+            // Store the user's preference for list view
+            localStorage.setItem("viewPreference", "list");
+        }
     });
-  });
-  
+
+    // Change button shadow color based on status
+    const updateButtonShadowColor = (elements, baseClass) => {
+        elements.forEach(element => {
+            const status = element.getAttribute("data-status");
+            const btnParent = element.querySelector("div");
+            if (status === "Upcoming") {
+                btnParent.classList.add(`${baseClass}-shadow-yellow`);
+            } else if (status === "Active") {
+                btnParent.classList.add(`${baseClass}-shadow-green`);
+            } else if (status === "Terminated") {
+                btnParent.classList.add(`${baseClass}-shadow-red`);
+            }
+        });
+    };
+
+    const cardButtons = document.querySelectorAll(".card .btn");
+    updateButtonShadowColor(cardButtons, "btn");
+
+    const listButtons = document.querySelectorAll(".list-item .list-read-more");
+    updateButtonShadowColor(listButtons, "list-read-more");
+});
 
 </script>
 
-
-
-
 {% endblock %}
-

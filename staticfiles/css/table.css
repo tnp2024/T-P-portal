@@ -41,9 +41,9 @@
 }
 
 .student-table th {
-    background-color: #63bbd1;
+    background-color: red;
     /* Light gray background for headers */
-    color: black;
+    color: rgb(223, 77, 77);
     font-weight: bold;
 }
 

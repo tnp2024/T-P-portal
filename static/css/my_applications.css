@@ -12,7 +12,7 @@
 h1 {
     margin-left: 6cm;
     color: #19515f;
-    font-family: sans-serif;
+    font-family: sans-serif, 'poppins';
     margin-bottom: 10px;
 
 }
@@ -26,14 +26,15 @@ h1 {
     /* Reduce the width */
     margin-left: 6cm;
     margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
 
     /* Reduce the margin-left */
     /* table-layout: 10px; Remove this line */
     border: 1px;
     border-radius: 7px;
     overflow: hidden;
-    color: var(--text-color-light-db);
-    background-color: var(--bg-color-light);
+    background-color: #fff;
     font-family: 'Poppins', sans-serif;
 
 }
@@ -42,8 +43,7 @@ h1 {
 .application-table td {
     border: 1px solid #ddd;
     padding: 8px;
-    font-size: small;
-    font-weight: lighter;
+    font-size: medium;
     text-align: left;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 
@@ -64,4 +64,8 @@ h1 {
 .application-table tr:hover {
     background-color: #83c6d7a0;
     cursor: pointer;
+}
+
+.application-table {
+    background-color: #f8f9fa;
 }

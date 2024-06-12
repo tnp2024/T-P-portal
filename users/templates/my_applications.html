@@ -15,19 +15,19 @@
 
         <table class="application-table">
             <tr>
-                <th>TYPE</th>
-                <th>TITLE</th>
-                <th>DATE OF APPLICATION</th>
-                <th>ROUND 1</th>
-                <th>ROUND 2</th>
-                <th>ROUND 3</th>
-                <th>ROUND 4</th>
-                <th>ROUND 5</th>
-                <th>SELECTED</th>
+                <th>Type</th>
+                <th>Title</th>
+                <th>Date of application</th>
+                <th>Round 1</th>
+                <th>Round 2</th>
+                <th>Round 3</th>
+                <th>Round 4</th>
+                <th>Round 5</th>
+                <th>Selected</th>
             </tr>
             {% for application in applied_activities %}
                 <tr>
-                    <td>ACTIVITY</td>
+                    <td>Activity</td>
                     <td><a href="{% url 'activity' application.activity.pk %}"style="color: #2391ad;">{{ application.activity.title }}</a></td>
                     <td>{{ application.applied_date }}</td>
                     <td>N/A</td>
@@ -40,7 +40,7 @@
             {% endfor %}
             {% for application in drive_applications %}
                 <tr>
-                    <td>DRIVE</td>
+                    <td>Drive</td>
                     <td><a href="{% url 'drive' application.drive.pk %}" style="color: #2391ad;">{{ application.drive.title }}</a></td>
                     <td>{{ application.applied_date }}</td>
                     <td>{% if application.round1 %}Completed{% else %}Pending{% endif %}</td>

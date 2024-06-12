@@ -67,6 +67,12 @@ class Drive(models.Model):
 from django.db import models
 
 class Activity(models.Model):      
+
+    ACTIVITY_STATUS_CHOICES = [
+        ('Terminated', 'Terminated'),
+        ('Active', 'Active'),
+        ('Upcoming', 'Upcoming'),
+    ]
     Reference_no = models.CharField(max_length=100)  
     activity_id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=100)
@@ -77,6 +83,7 @@ class Activity(models.Model):
     department = models.ManyToManyField(Department)
     content = models.TextField()
     creation_date = models.DateTimeField(auto_now_add=True)
+    activity_status = models.CharField(max_length=10, choices=ACTIVITY_STATUS_CHOICES, default='Upcoming')
 
     def __str__(self):
         return self.title

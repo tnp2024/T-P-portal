@@ -35,6 +35,8 @@
                 <div class="profile-picture">
                     {% if user_profile.Profile_photo %}
                     <img src="{{ user_profile.Profile_photo.url }}" alt="Profile Picture" class="profile-image" />
+                    {% elif user_profile.PROFILE_PHOTO %}
+                    <img src="{{ user_profile.PROFILE_PHOTO.url }}" alt="Profile Picture" class="profile-image" />
                     {% else %}
                     <img src="{% static 'images/user-default.png.' %}" alt="Placeholder Profile Picture" class="profile-image" />
                     {% endif %}

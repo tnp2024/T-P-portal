@@ -14,14 +14,14 @@
 <div class="card-container" id="cardContainer"> <!-- Correct class name to match CSS -->
 
   {% for activity in activities %}
-  <div class="card">
+  <div class="card" data-status="{{ drive.drive_status }}">
     <div class="img">
       <img src="{{ activity.company_logo.url }}" alt="Company Logo" />
     </div>
     <div class="all-text">
       <div class="name">{{ activity.title }}</div>
       <div class="all_drives">Industry Type: {{ activity.industry_type }}</div>   
-      <div class="text">Date: {{ activity.activity_date }}</div>
+      <div class="text">Date: {{ activity.activity_date }} | <span class="status-text {{ activity.activity_status | lower }}">{{ activity.activity_status }}</span></div>
       <div class="btn">
         <a href="{% url 'activity' activity.activity_id %}">Read more</a>
       </div>
@@ -32,7 +32,7 @@
 
 <div class="list-container" id="listContainer" style="display: none;">
   {% for activity in activities %}
-  <div class="list-item">
+  <div class="list-item" data-status="{{ drive.drive_status }}">
     <div class="list-item-left">
       <div class="logo">
         <img src="{{ activity.company_logo.url }}" alt="Company Logo" />
@@ -40,7 +40,7 @@
       <div class="dates">
         <div class="drive-title">{{ activity.title }}</div>
         <div class="post-date">Posted on: {{ activity.creation_date }} </div>
-        <div class="post-date">Date of Drive: {{activity.activity_date}} </div>
+        <div class="post-date">Date of Drive: {{activity.activity_date}} | Last Date: {{ activity.application_last_date }}  |  <span class="status-text {{ activity.activity_status | lower }}">{{ activity.activity_status }}</span> </div>
 
       </div>
     </div>
@@ -52,27 +52,61 @@
   </div>
   {% endfor %}
 </div>
+
 <script>
   document.addEventListener("DOMContentLoaded", function() {
-    const toggleButton = document.getElementById("toggleButton");
-    const cardContainer = document.getElementById("cardContainer");
-    const listContainer = document.getElementById("listContainer");
-  
-    toggleButton.addEventListener("click", function() {
-      if (cardContainer.style.display === "none") {
-        // Switching to card view
-        cardContainer.style.display = "grid";
-        listContainer.style.display = "none";
-      } else {
-        // Switching to list view
-        cardContainer.style.display = "none";
-        listContainer.style.display = "block";
-      }
-    });
-  });
-  
-
-</script>
+     const toggleButton = document.getElementById("toggleButton");
+     const cardContainer = document.getElementById("cardContainer");
+     const listContainer = document.getElementById("listContainer");
+ 
+     // Check if the user has a stored preference for the view
+     const storedView = localStorage.getItem("viewPreference");
+ 
+     if (storedView === "card") {
+         cardContainer.style.display = "grid";
+         listContainer.style.display = "none";
+     } else {
+         cardContainer.style.display = "none";
+         listContainer.style.display = "block";
+     }
+ 
+     toggleButton.addEventListener("click", function() {
+         if (cardContainer.style.display === "none") {
+             cardContainer.style.display = "grid";
+             listContainer.style.display = "none";
+             // Store the user's preference for card view
+             localStorage.setItem("viewPreference", "card");
+         } else {
+             cardContainer.style.display = "none";
+             listContainer.style.display = "block";
+             // Store the user's preference for list view
+             localStorage.setItem("viewPreference", "list");
+         }
+     });
+ 
+     // Change button shadow color based on status
+     const updateButtonShadowColor = (elements, baseClass) => {
+         elements.forEach(element => {
+             const status = element.getAttribute("data-status");
+             const btnParent = element.querySelector("div");
+             if (status === "Upcoming") {
+                 btnParent.classList.add(`${baseClass}-shadow-yellow`);
+             } else if (status === "Active") {
+                 btnParent.classList.add(`${baseClass}-shadow-green`);
+             } else if (status === "Terminated") {
+                 btnParent.classList.add(`${baseClass}-shadow-red`);
+             }
+         });
+     };
+ 
+     const cardButtons = document.querySelectorAll(".card .btn");
+     updateButtonShadowColor(cardButtons, "btn");
+ 
+     const listButtons = document.querySelectorAll(".list-item .list-read-more");
+     updateButtonShadowColor(listButtons, "list-read-more");
+ });
+ 
+ </script>
 
 {% endblock %}
 
