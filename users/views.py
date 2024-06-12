@@ -264,7 +264,7 @@ def edit_coordinator_profile(request):
     coordinator = get_object_or_404(Coordinator, user=request.user)
 
     if request.method == 'POST':
-        form = CoordinatorForm(request.POST, instance=coordinator)
+        form = CoordinatorForm(request.POST,request.FILES, instance=coordinator)
         if form.is_valid():
             form.save()
             return redirect('profile')  # Redirect to the profile page after successful edit

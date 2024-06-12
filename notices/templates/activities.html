@@ -6,9 +6,11 @@
 
 {% block content %}
 
-  <div class="view-toggle">
-    <button id="toggleButton">Toggle View</button>
-  </div>
+<div class="view-toggle">
+  <button id="toggleButton"><i class='bx bx-list-ul' ></i><span class="tooltip">Change View</span>
+
+  </button>
+</div>
 <div class="card-container" id="cardContainer"> <!-- Correct class name to match CSS -->
 
   {% for activity in activities %}
@@ -50,7 +52,6 @@
   </div>
   {% endfor %}
 </div>
-
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     const toggleButton = document.getElementById("toggleButton");

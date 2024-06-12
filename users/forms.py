@@ -178,11 +178,6 @@ from django.contrib.auth.forms import SetPasswordForm
 class ForgotPasswordForm(forms.Form):
     email = forms.EmailField()
 
-class OTPForm(forms.Form):
-    otp = forms.CharField(max_length=6)
 
-class CustomSetPasswordForm(SetPasswordForm):
-    # Override to customize if necessary
-    pass
 
 
