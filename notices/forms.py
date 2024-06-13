@@ -1,5 +1,5 @@
 from django import forms
-from .models import Drive,Activity,Department
+from .models import Drive,Activity,Booklets
 
 
 
@@ -44,3 +44,8 @@ class ActivityForm(forms.ModelForm):
             field.widget.attrs['class'] = 'form-control'
             if name == 'activity_date':
                 field.widget.attrs['placeholder'] = 'YYYY-MM-DD'
+
+class BookletForm(forms.ModelForm):
+    class Meta:
+        model = Booklets
+        fields = ['booklet', 'department', 'company_name']                

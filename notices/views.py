@@ -7,11 +7,11 @@ from django.contrib.staticfiles import finders  # Import finders to locate stati
 from .models import Drive  # Import the Drive model
 from reportlab.lib.enums import TA_CENTER,TA_RIGHT
 from django.shortcuts import render,redirect,get_object_or_404
-from .models import Drive,Activity,Department
+from .models import Drive,Activity,Department,Booklets
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 
-from .forms import DriveForm,ActivityForm
+from .forms import DriveForm,ActivityForm,BookletForm
 # Create your views here.
 
 from functools import wraps
@@ -392,3 +392,21 @@ def delete_Activity(request, pk):
         return redirect('activities')  # Redirect to any appropriate URL
     context={'activity':activity}
     return render(request, 'delete_activity.html', context)
+
+@tnpoffice_required
+def upload_booklet(request):
+    if request.method == 'POST':
+        form = BookletForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('all-booklets') 
+    else:
+        form = BookletForm()
+    return render(request, 'upload_booklet.html', {'form': form})
+
+
+
+
+def list_booklets(request):
+    departments = Department.objects.prefetch_related('booklets_set').all()
+    return render(request, 'list_booklets.html', {'departments': departments})

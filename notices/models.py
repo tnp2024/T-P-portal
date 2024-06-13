@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+import uuid
 
 # Create your models here.
 
@@ -76,7 +77,7 @@ class Activity(models.Model):
     Reference_no = models.CharField(max_length=100)  
     activity_id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=100)
-    company_logo = models.ImageField(null=True,blank=True)
+    company_logo = models.ImageField(null=True,blank=True,upload_to='logos/')
     company_name = models.CharField(max_length=255)
     industry_type = models.CharField(max_length=255)
     activity_date = models.DateField()
@@ -90,3 +91,16 @@ class Activity(models.Model):
     class Meta:
         ordering = ['creation_date']
 
+class Booklets(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    booklet = models.FileField(upload_to='booklets/')
+    department = models.ManyToManyField('Department')
+    company_name = models.CharField(max_length=255)
+    creation_date = models.DateTimeField(auto_now_add=True)
+    company_logo = models.ImageField(null=True,blank=True,upload_to='logos/')
+
+    def __str__(self):
+        return self.company_name
+
+    class Meta:
+        ordering = ['creation_date']

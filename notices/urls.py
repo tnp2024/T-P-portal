@@ -15,6 +15,9 @@ urlpatterns = [
     path('update-activity/<str:pk>/',views.updateActivity, name='update-activity'),
     path('delete-activity/<str:pk>/', views.delete_Activity, name='delete-activity'),
     path('sidebar/',views.sidebar, name='sidebar'),
+    path('upload-booklet/',views.upload_booklet, name='upload_booklet'),
+    path('booklets/',views.list_booklets, name='all-booklets'),
+
 
     path('dashboard/',views.dashboard, name='dashboard'),
 

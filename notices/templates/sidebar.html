@@ -174,7 +174,14 @@
                             {% endif %}
                         </a>
                     </li>
+         
                     {% endif %}
+                    <li class="nav-link {% if request.path == '/booklets/' %}active{% endif %}">
+                        <a href="{% url 'all-booklets' %}">
+                            <i class='bx bx-home-alt icon' ></i>
+                            <span class="text nav-text">Booklets</span>
+                        </a>
+                    </li>
 
 
 
