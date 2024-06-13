@@ -393,7 +393,7 @@ def delete_Activity(request, pk):
     context={'activity':activity}
     return render(request, 'delete_activity.html', context)
 
-@tnpoffice_required
+@student_not_required
 def upload_booklet(request):
     if request.method == 'POST':
         form = BookletForm(request.POST, request.FILES)

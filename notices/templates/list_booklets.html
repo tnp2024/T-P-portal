@@ -70,8 +70,57 @@
         background-color: #0f3243;
         color: white;
     }
+/*  */
+.notice_button {
+    width: 80px;
+    height: 60px;
+    justify-content: center;
+    margin-left: 300px;
+    gap: 40px;
+
+
+}
+
+.notice_button button {
+    font-family: 'Poppins', sans-serif;
+
+    /* margin: 0 10px; */
+    /* Adjust the gap between buttons */
+    margin-top: 1cm;
+
+    cursor: pointer;
+    border-radius: 5px;
+    /* border-radius: 30px; */
+    background-color: #63bbd1;
+    color: white;
+    /* White text */
+    font-size: 16px;
+    overflow: hidden;
+    /* Transition background-color, color, and transform */
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* Add shadow for depth */
+}
+
+
+.notice_button button:hover {
+    color: white;
+    background-color: #0f3243;
+
+    /* Add more pronounced upward movement on hover */
+}
+
+
+
 
 </style>
+{% if request.user.is_authenticated and request.user.user_type != 'Student' %}
+<div class="notice_button">
+    
+    <a href="{% url 'upload_booklet' %}"><button id="create_activity">Upload Booklet</button></a>
+
+  </div>
+  {% endif %}
 
 <div class="list-container" id="listContainer">
     {% for department in departments %}
