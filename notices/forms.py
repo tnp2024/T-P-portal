@@ -48,4 +48,8 @@ class ActivityForm(forms.ModelForm):
 class BookletForm(forms.ModelForm):
     class Meta:
         model = Booklets
-        fields = ['booklet', 'department', 'company_name','company_logo']                
+        fields = ['booklet', 'department', 'company_name','company_logo']   
+
+        widgets = {
+            'department': forms.CheckboxSelectMultiple()
+        }             
