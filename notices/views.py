@@ -404,7 +404,25 @@ def upload_booklet(request):
         form = BookletForm()
     return render(request, 'upload_booklet.html', {'form': form})
 
+def update_Booklet(request, pk):
+    booklet = get_object_or_404(Booklets, id=pk)
+    form = BookletForm(instance=booklet)
+    if request.method == 'POST':
+        form = BookletForm(request.POST, request.FILES, instance=booklet)
+        if form.is_valid():
+            form.save()
+            return redirect('all-booklets')  # Redirect to any appropriate URL
+    context = {'form': form}
+    return render(request, 'upload_booklet.html', context)
 
+@tnpoffice_required 
+def delete_Booklet(request, pk):
+    booklet = get_object_or_404(Booklets,id=pk)
+    if request.method == 'POST':
+        booklet.delete()
+        return redirect('all-booklets')  # Redirect to any appropriate URL
+    context={'booklet':booklet}
+    return render(request, 'delete_booklet.html', context)
 
 
 def list_booklets(request):

@@ -17,7 +17,8 @@ urlpatterns = [
     path('sidebar/',views.sidebar, name='sidebar'),
     path('upload-booklet/',views.upload_booklet, name='upload_booklet'),
     path('booklets/',views.list_booklets, name='all-booklets'),
-
+    path('update-booklet/<str:pk>/',views.update_Booklet, name='update-booklet'),
+    path('delete-booklet/<str:pk>/', views.delete_Booklet, name='delete-booklet'),
 
     path('dashboard/',views.dashboard, name='dashboard'),
 

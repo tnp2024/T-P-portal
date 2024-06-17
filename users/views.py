@@ -305,7 +305,7 @@ def edit_tnpoffice_profile(request):
     tnpoffice = get_object_or_404(TNPOffice, user=request.user)
 
     if request.method == 'POST':
-        form = TNPOfficeForm(request.POST, instance=tnpoffice)
+        form = TNPOfficeForm(request.POST,request.FILES, instance=tnpoffice)
         if form.is_valid():
             form.save()
             return redirect('profile')  # Redirect to the profile page after successful edit
