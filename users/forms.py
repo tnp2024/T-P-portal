@@ -56,14 +56,14 @@ class StudentForm(forms.ModelForm):
         choices=Student.preferences,
         widget=forms.Select(attrs={'class': 'form-select'})
     )
-    Placed = forms.ChoiceField(
-        choices=Student.Boolean_choices,
-        widget=forms.Select(attrs={'class': 'form-select'})
-    )
-    Placement_type = forms.ChoiceField(
-        choices=Student.Placement_choice,
-        widget=forms.Select(attrs={'class': 'form-select'})
-    )
+    # Placed = forms.ChoiceField(
+    #     choices=Student.Boolean_choices,
+    #     widget=forms.Select(attrs={'class': 'form-select'})
+    # )
+    # Placement_type = forms.ChoiceField(
+    #     choices=Student.Placement_choice,
+    #     widget=forms.Select(attrs={'class': 'form-select'})
+    # )
     Pass_out_Year = forms.ChoiceField(
         choices=Student.YEAR_CHOICES,
         widget=forms.Select(attrs={'class': 'form-select'})
@@ -72,7 +72,7 @@ class StudentForm(forms.ModelForm):
     class Meta:
         model = Student
         fields = '__all__'
-        exclude = ['user', 'AVG_TILL_SEM_cgpa', 'AVG_TILL_SEM_percentage']
+        exclude = ['user', 'AVG_TILL_SEM_cgpa', 'AVG_TILL_SEM_percentage','Company_name','Placement_type','Placed']
 
         widgets = {
             'FIRST_NAME': forms.TextInput(attrs={'class': 'form-control'}),
@@ -109,7 +109,6 @@ class StudentForm(forms.ModelForm):
             'Languages': forms.TextInput(attrs={'class': 'form-control'}),
             'minor_projects': forms.TextInput(attrs={'class': 'form-control'}),
             'major_projects': forms.TextInput(attrs={'class': 'form-control'}),
-            'Company_name': forms.TextInput(attrs={'class': 'form-control'}),
             'Profile_photo': forms.ClearableFileInput(attrs={'class': 'form-control'}),
         }
 

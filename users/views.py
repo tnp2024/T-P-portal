@@ -234,6 +234,7 @@ def register_student(request):
     return render(request, 'student_registration.html', {'user_form': user_form, 'student_form': student_form, })
 
 
+
 @tnpoffice_required
 def register_coordinator(request):
     if request.method == 'POST':
