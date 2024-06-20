@@ -79,7 +79,7 @@ class StudentForm(forms.ModelForm):
             'MIDDLE_NAME': forms.TextInput(attrs={'class': 'form-control'}),
             'LAST_NAME': forms.TextInput(attrs={'class': 'form-control'}),
             'PRN': forms.NumberInput(attrs={'class': 'form-control'}),
-            'EMAIL': forms.EmailInput(attrs={'class': 'form-control'}),
+            'EMAIL': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Enter your email same as Email address field'}),
             'PERSONAL_EMAIL': forms.EmailInput(attrs={'class': 'form-control'}),
             'AGE': forms.NumberInput(attrs={'class': 'form-control'}),
             'MOBILE_NO': forms.NumberInput(attrs={'class': 'form-control'}),
