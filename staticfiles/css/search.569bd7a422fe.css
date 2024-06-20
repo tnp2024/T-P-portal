@@ -1,0 +1,97 @@
+.search_container {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin-top: 100px;
+    /* Reduced margin for a cleaner look */
+    padding: 20px;
+    /* Added padding for better spacing */
+    background-color: #f9f9f9;
+    /* Light background color */
+    font-family: 'Poppins', sans-serif;
+
+}
+
+.search_heading {
+    text-align: center;
+    margin-top: 20px;
+    /* Added margin to create space from the top */
+    margin-bottom: 30px;
+    /* Space between heading and results */
+    color: #0f3243;
+    font-size: 40px;
+    /* Increased font size for prominence */
+    font-weight: bold;
+}
+
+.search_results {
+    width: 100%;
+    /* Full width to match container */
+    max-width: 800px;
+    /* Limit width for better readability */
+    text-align: left;
+    /* Align text to the left for better readability */
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    /* Reset margin */
+    overflow-y: visible;
+}
+
+.search_results li {
+    margin: 10px 0;
+    /* Space between list items */
+    color: #47c0c6;
+    font-weight: bold;
+    border-bottom: 1px solid #0f3243;
+    /* Separator for better distinction */
+    padding-bottom: 10px;
+    /* Padding for better spacing */
+}
+
+.search_results a {
+    text-decoration: none;
+    color: #0f3243;
+    /* Changed color for better contrast */
+    padding: 10px 15px;
+    /* Increased padding for better click area */
+    border: 2px solid #47c0c6;
+    border-radius: 5px;
+    display: inline-block;
+    transition: background-color 0.3s, color 0.3s;
+    /* Smooth transitions */
+}
+
+.search_results a:hover {
+    background-color: #47c0c6;
+    /* Background change on hover */
+    color: #ffffff;
+    /* Text color change on hover */
+}
+
+@media (max-width: 600px) {
+    .search_container {
+        margin-top: 20px;
+        /* Adjust margin for smaller screens */
+        padding: 10px;
+        /* Adjust padding for smaller screens */
+    }
+
+    .search_heading {
+        font-size: 1.5em;
+        /* Adjust font size for smaller screens */
+    }
+
+    .search_results {
+        max-width: 100%;
+        /* Full width on smaller screens */
+    }
+
+    .search_results a {
+        padding: 8px 12px;
+        /* Adjust padding for smaller screens */
+    }
+}

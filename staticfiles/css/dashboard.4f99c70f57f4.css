@@ -1,0 +1,81 @@
+/*  */
+.notice_button {
+    width: fit-content;
+    height: fit-content;
+    justify-content: center;
+    margin-left: 600px;
+    display: flex;
+    gap: 40px;
+
+
+}
+
+.notice_button button {
+    font-family: 'Poppins', sans-serif;
+
+    padding: 24px 24px;
+    /* margin: 0 10px; */
+    /* Adjust the gap between buttons */
+    margin-top: 10cm;
+
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    /* border-radius: 30px; */
+    background-color: #63bbd1;
+    color: white;
+    /* White text */
+    font-size: 16px;
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    /* Transition background-color, color, and transform */
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* Add shadow for depth */
+}
+
+/*.notice_button button span {
+    position: relative;
+    z-index: 1;
+  }*/
+
+.notice_button button::before {
+
+    /* position: absolute; */
+
+    /* width: 70%;
+    height: 100%; */
+    z-index: -1;
+    transition: opacity 0.3s ease;
+    /* Transition opacity */
+}
+
+/*
+  .notice_button button:hover::before {
+    opacity: 0; 
+  }*/
+
+.notice_button button:hover {
+    color: white;
+    transform: translateY(-4px);
+    background-color: #0f3243;
+
+    /* Add more pronounced upward movement on hover */
+}
+
+.notice_button button::after {
+    /* position: absolute; */
+
+    background-color: #63bbd132;
+    /* Add more prominent overlay for contrast */
+    /* z-index: -1; */
+    /*border-radius: 30px;
+    transition: opacity 0.3s ease;
+    /* Transition opacity */
+}
+
+.notice_button button:hover::after {
+    opacity: 0.1;
+    /* Make overlay more visible on hover */
+}
