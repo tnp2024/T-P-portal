@@ -11,48 +11,50 @@
 
 </head>
 <body>
-<div class="container">
-    <div class="left-section">
-      <div class="upper-left">
-        <h1>Central Training & Placement Department</h1>
-        <h3>Providing opportunities and preparing for the workforce.</h3>
-    </div>
-        <div class="lower-left">
-            <!-- Add your image here -->
-            <img src="{% static 'images/image.png' %}">
-
+    <div class="container">
+        <div class="left-section">
+            <div class="upper-left">
+                <h1>Central Training & Placement Department</h1>
+                <h3>Providing opportunities and preparing for the workforce.</h3>
+            </div>
+            <div class="lower-left">
+                <!-- Add your image here -->
+                <img src="{% static 'images/image.png' %}">
+            </div>
+        </div>
+        <div class="right-section">
+            <div class="login-container">
+                <h1>Login to Your Account</h1>
+                <form method="POST" id="loginForm">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" id="email" name="email" placeholder="Enter your email">
+                        <i class="fas fa-envelope"></i>
+                        <div class="greeting">Welcome back!</div>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="password" name="password" placeholder="Enter your password">
+                        <i class="fas fa-eye toggle-password"></i>
+                        <div class="greeting">Keep your account secure.</div>
+                    </div>
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p style="color: red;">{{ message }}</p>
+                        {% endfor %}
+                    {% endif %}
+                    <button type="submit" class="btn-primary">Login</button>
+                    <div class="login-options">
+                        <a href="#" id="registerLink">Register</a>
+                        |
+                        <a href="{% url 'password_reset' %}">Forgot Password?</a>
+                    </div>
+                </form>
+                <div class="flowing-text">Your flowing text goes here.</div>
+                <!-- Ensure .flowing-text is directly inside .login-container -->
+            </div>
         </div>
     </div>
-    <div class="right-section">
-        <div class="login-container">
-            <h1>Login to Your Account</h1>
-            <form method="POST" id="loginForm">
-                {% csrf_token %}
-                <div class="form-group">
-                    <input type="text" id="email" name="email" placeholder="Enter your email">
-                    <i class="fas fa-envelope"></i>
-                    <div class="greeting">Welcome back!</div>
-                </div>
-                <div class="form-group">
-                    <input type="password" id="password" name="password" placeholder="Enter your password">
-                    <i class="fas fa-eye toggle-password"></i>
-                    <div class="greeting">Keep your account secure.</div>
-                </div>
-                {% if messages %}
-                {% for message in messages %}
-                    <p style="color: red;">{{ message }}</p>
-                {% endfor %}
-                {% endif %}
-                <button type="submit" class="btn-primary">Login</button>
-                <div class="login-options">
-                    <a href="#" id="registerLink">Register</a>
-                    |
-                    <a href="{% url 'password_reset' %}">Forgot Password?</a>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+    
 
     <!-- Terms and Conditions Pop-up -->
     <div class="popup-overlay" id="termsPopup" style="display: none;">
@@ -150,6 +152,21 @@
               popup.style.display = 'none';
           }
       });
+
+      document.addEventListener('DOMContentLoaded', function() {
+    // Get the flowing text element
+    var flowingText = document.querySelector('.flowing-text');
+    
+    // Get the width of login-container
+    var containerWidth = document.querySelector('.login-container').offsetWidth;
+    
+    // Calculate duration based on the container width and animation speed
+    var duration = (containerWidth + flowingText.offsetWidth) / 50; // Adjust speed as needed
+    
+    // Set animation style
+    flowingText.style.animationDuration = duration + 's';
+});
+
     </script>
 </body>
 </html>

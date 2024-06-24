@@ -1,16 +1,14 @@
 {% extends 'main.html' %}
 
 {% block content %}
-    {% if not applied_activities and not applied_drives %}
+    {% if not applied_activities and not drive_applications %}
         <p>No applications found. <a href="{% url 'all-drives' %}">Go to drives</a></p>
     {% else %}
-    <div class="application-table-container" >
+    <div class="application-table-container">
         {% if request.user.user_type != 'Student' %}
-
-        <h1>Student's Applications </h1>
+            <h1>Student's Applications </h1>
         {% else %}
-
-        <h1>My Applications </h1>
+            <h1>My Applications </h1>
         {% endif %}
 
         <table class="application-table">
@@ -28,7 +26,7 @@
             {% for application in applied_activities %}
                 <tr>
                     <td>Activity</td>
-                    <td><a href="{% url 'activity' application.activity.pk %}"style="color: #2391ad;">{{ application.activity.title }}</a></td>
+                    <td><a href="{% url 'activity' application.activity.pk %}" style="color: #2391ad;">{{ application.activity.title }}</a></td>
                     <td>{{ application.applied_date }}</td>
                     <td>N/A</td>
                     <td>N/A</td>
@@ -52,7 +50,6 @@
                 </tr>
             {% endfor %}
         </table>
-    </div>    
+    </div>
     {% endif %}
-
 {% endblock %}

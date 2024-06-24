@@ -464,7 +464,7 @@ def my_applications(request, student_prn):
         }
         drive_applications.append(round_info)
     
-    # You can also filter activities or other related data for the student if needed
+    # Filter ActivityApplication objects for the current student
     applied_activities = ActivityApplication.objects.filter(student=student)
     
     context = {
@@ -473,12 +473,12 @@ def my_applications(request, student_prn):
         'student': student
     }
     
+    # Check user permissions and render the appropriate template
     if (request.user.user_type == 'Coordinator' or request.user.user_type == 'TNP-Office') \
         or (request.user.student.PRN == student_prn):
         return render(request, 'my_applications.html', context)
     else:
         return render(request, 'dashboard.html')  # Render appropriate dashboard template
-   
 
 @login_required
 @student_required
