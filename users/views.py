@@ -6,7 +6,8 @@ from django.contrib.auth.decorators import login_required
 from notices.views import student_required,coordinator_required,tnpoffice_required,student_not_required
 from django.contrib import messages
 from django.db.models import Q
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.shortcuts import render
 
 
 
@@ -94,9 +95,7 @@ def trigger_coordinator(student, changed_fields):
     # Return the selected coordinator (for debugging or further use if needed)
     return coordinator
 
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.shortcuts import render
-from .models import ProfileChange
+
 
 def profile_changes_for_coordinator(request):
     # Retrieve the currently logged-in coordinator

@@ -142,7 +142,7 @@ class LoginForm(forms.Form):
 class ProfileChangeForm(forms.ModelForm):
     class Meta:
         model = Student
-        fields = ['Profile_photo', 'PERSONAL_EMAIL', 'MOBILE_NO', 'ALT_Mobile_NO', 'LOCAL_ADDRS', 'PERM_ADDRS', 'Pass_out_Year',
+        fields = [ 'PERSONAL_EMAIL', 'MOBILE_NO', 'ALT_Mobile_NO', 'LOCAL_ADDRS', 'PERM_ADDRS', 'Pass_out_Year',
                   'SEM_5_sgpa',  'SEM_6_sgpa',  'SEM_7_sgpa', 
                   'SEM_8_sgpa', 'Live_backlogs', 'Dead_backlogs', 'Year_gap', 'Languages',
                   'minor_projects', 'major_projects', 'Preference_1', 'Preference_2', 'Preference_3', 'Placed']
@@ -168,14 +168,9 @@ class RoundDataForm(forms.ModelForm):
 class UploadFilesForm(forms.ModelForm):
     class Meta:
         model = Student
-        fields = [ 'Xth_marksheet','XIIth_marksheet','Diploma_Firstyear_marksheet','Diploma_Secondyear_marksheet','Diploma_Thirdyear_marksheet','sem1_marksheet','sem2_marksheet','sem3_marksheet','sem4_marksheet','sem5_marksheet',  'sem6_marksheet',  'sem7_marksheet',
+        fields = [ 'Profile_photo','Xth_marksheet','XIIth_marksheet','Diploma_Firstyear_marksheet','Diploma_Secondyear_marksheet','Diploma_Thirdyear_marksheet','sem1_marksheet','sem2_marksheet','sem3_marksheet','sem4_marksheet','sem5_marksheet',  'sem6_marksheet',  'sem7_marksheet',
                    'sem8_marksheet']
  
-from django import forms
-from django.contrib.auth.forms import SetPasswordForm
-
-class ForgotPasswordForm(forms.Form):
-    email = forms.EmailField()
 
 
 
