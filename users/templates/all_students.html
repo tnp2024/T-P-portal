@@ -69,7 +69,22 @@
         <th>Diploma branch</th>
         <th>Admission type</th>
         <th>Pass out year</th>
-        <th>Department</th>
+        <th>Department
+            <select class="filter-dropdown" id="departmentFilter">
+                <option value="all">All</option>
+                <option value="MCA">MCA</option>
+                <option value="UDICT">UDICT</option>
+                <option value="Architecture">Architecture</option>
+                <option value="Artificial Intelligence and Data Science">Artificial Intelligence and Data Science</option>
+                <option value="Chemical Engineering">Chemical Engineering</option>
+                <option value="Civil Engineering">Civil Engineering</option>
+                <option value="Computer Science and Engineering">Computer Science and Engineering</option>
+                <option value="Electrical and Computer Engineering">Electrical and Computer Engineering</option>
+                <option value="Electronics and Computer Engineering">Electronics and Computer Engineering</option>
+                <option value="Mechanical Engineering">Mechanical Engineering</option>
+            </select>
+
+        </th>
         <th>Sem1 sgpa</th>
         <th>Sem2 sgpa</th>
         <th>Sem3 sgpa</th>
@@ -176,56 +191,66 @@
             
 
             </tr>
+
+
+
+
         {% endfor %}
     </tbody>
 </table>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        function applyFilters() {
-            var genderFilter = document.getElementById("genderFilter").value;
-            var xPercentFilter = document.getElementById("xPercentFilter").value;
-            var xiiPercentFilter = document.getElementById("xiiPercentFilter").value;
-            var diplomaPercentFilter = document.getElementById("diplomaPercentFilter").value;
-            var avgPercentFilter = document.getElementById("avgPercentFilter").value;
-            var liveBacklogFilter = document.getElementById("liveBacklogFilter").value;
-            var deadBacklogFilter = document.getElementById("deadBacklogFilter").value;
-            var yearGapFilter = document.getElementById("yearGapFilter").value;
-            var placedFilter = document.getElementById("placedFilter").value;
-
-            var table = document.getElementById("myTable");
-            var rows = table.getElementsByTagName("tr");
-
-            for (var i = 1; i < rows.length; i++) {
-                var row = rows[i];
-                var genderCell = row.cells[5];
-                var xPercentCell = row.cells[14];
-                var xiiPercentCell = row.cells[17];
-                var diplomaPercentCell = row.cells[20];
-                var avgPercentCell = row.cells[36];
-                var liveBacklogCell = row.cells[37];
-                var deadBacklogCell = row.cells[38];
-                var yearGapCell = row.cells[39];
-                var placedCell = row.cells[43];
-
-                if (
-                    (genderFilter === "all" || genderCell.textContent.trim() === genderFilter) &&
-                    (xPercentFilter === "all" || xPercentCell.textContent.trim() === xPercentFilter) &&
-                    (xiiPercentFilter === "all" || xiiPercentCell.textContent.trim() === xiiPercentFilter) &&
-                    (diplomaPercentFilter === "all" || diplomaPercentCell.textContent.trim() === diplomaPercentFilter) &&
-                    (avgPercentFilter === "all" || avgPercentCell.textContent.trim() === avgPercentFilter) &&
-                    (liveBacklogFilter === "all" || liveBacklogCell.textContent.trim() === liveBacklogFilter) &&
-                    (deadBacklogFilter === "all" || deadBacklogCell.textContent.trim() === deadBacklogFilter) &&
-                    (yearGapFilter === "all" || yearGapCell.textContent.trim() === yearGapFilter) &&
-                    (placedFilter === "all" || placedCell.textContent.trim() === placedFilter)
-                ) {
-                    row.style.display = "";
-                } else {
-                    row.style.display = "none";
-                }
-            }
+    function applyFilters() {
+        var genderFilter = document.getElementById("genderFilter").value;
+        var departmentFilter = document.getElementById("departmentFilter").value;
+        var xPercentFilter = document.getElementById("xPercentFilter").value;
+        var xiiPercentFilter = document.getElementById("xiiPercentFilter").value;
+        var diplomaPercentFilter = document.getElementById("diplomaPercentFilter").value;
+        var avgPercentFilter = document.getElementById("avgPercentFilter").value;
+        var liveBacklogFilter = document.getElementById("liveBacklogFilter").value;
+        var deadBacklogFilter = document.getElementById("deadBacklogFilter").value;
+        var yearGapFilter = document.getElementById("yearGapFilter").value;
+        var placedFilter = document.getElementById("placedFilter").value;
+      
+        var table = document.getElementById("myTable");
+        var rows = table.getElementsByTagName("tr");
+      
+        for (var i = 1; i < rows.length; i++) {
+          var row = rows[i];
+          var genderCell = row.cells[5];
+          var xPercentCell = row.cells[14];
+          var xiiPercentCell = row.cells[17];
+          var diplomaPercentCell = row.cells[20];
+          var departmentCell = row.cells[26];
+          var avgPercentCell = row.cells[36];
+          var liveBacklogCell = row.cells[37];
+          var deadBacklogCell = row.cells[38];
+          var yearGapCell = row.cells[39];
+          var placedCell = row.cells[43];
+      
+          // Separate conditions with clear variable names
+          var genderMatches = genderFilter === "all" || genderCell.textContent.trim().toLowerCase() === genderFilter.toLowerCase();
+          var departmentMatches = departmentFilter === "all" || departmentCell.textContent.trim() === departmentFilter;
+          var xPercentMatches = xPercentFilter === "all" || xPercentCell.textContent.trim() === xPercentFilter;
+          var xiiPercentMatches = xiiPercentFilter === "all" || xiiPercentCell.textContent.trim() === xiiPercentFilter;
+          var diplomaPercentMatches = diplomaPercentFilter === "all" || diplomaPercentCell.textContent.trim() === diplomaPercentFilter;
+          var avgPercentMatches = avgPercentFilter === "all" || avgPercentCell.textContent.trim() === avgPercentFilter;
+          var liveBacklogMatches = liveBacklogFilter === "all" || liveBacklogCell.textContent.trim() === liveBacklogFilter;
+          var deadBacklogMatches = deadBacklogFilter === "all" || deadBacklogCell.textContent.trim() === deadBacklogFilter;
+          var yearGapMatches = yearGapFilter === "all" || yearGapCell.textContent.trim() === yearGapFilter;
+          var placedMatches = placedFilter === "all" || placedCell.textContent.trim() === placedFilter;
+      
+          // Combine conditions using AND operator (all conditions must be true)
+          if (genderMatches && departmentMatches && xPercentMatches && xiiPercentMatches && diplomaPercentMatches &&
+              avgPercentMatches && liveBacklogMatches && deadBacklogMatches && yearGapMatches && placedMatches) {
+            row.style.display = "";
+          } else {
+            row.style.display = "none";
+          }
         }
+      }
+      
 
         var applyButton = document.getElementById("applyButton");
         if (applyButton) {
@@ -233,7 +258,7 @@
         } else {
             console.error("Button with ID 'applyButton' not found.");
         }
-    });
+    
 
     function downloadTable() {
         // Select the table
@@ -254,4 +279,3 @@ function goBack() {
 
 </body>
 </html>
-
