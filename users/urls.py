@@ -14,7 +14,8 @@ urlpatterns = [
     path('student-profile/<int:student_prn>/', views.student_profile, name='student_profile'),
     path('profile/edit_coordinator/', views.edit_coordinator_profile, name='coordinator_edit'),
     path('profile/edit_tnpoffice/', views.edit_tnpoffice_profile, name='tnpoffice_edit'),
-  
+     path('student/delete/<int:pk>/', views.delete_student, name='student_delete'),
+
     path('profile/', views.profile, name='profile'),
     path('upload-files/<str:student_prn>/', views.student_upload_files, name='upload_files'),
     path('edit_student_profile/<int:student_prn>/', views.edit_student_profile, name='edit_student_profile'),

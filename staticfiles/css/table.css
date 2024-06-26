@@ -1,5 +1,5 @@
 .custom-link {
-    color: #11587c;
+    color: yellow;
     /* Set the desired link color */
     text-decoration: none;
     /* Remove underline from the link */
@@ -9,6 +9,8 @@
     text-decoration: underline;
     /* Add underline on hover */
 }
+
+
 
 .student-table {
     margin-top: 10px;

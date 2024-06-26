@@ -6,7 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{% static 'css/table.css' %}" /> 
 
-    <title>JNEC T&P PORTAL</title>
+    <title>MGMU T&P PORTAL</title>
+    <style>
+
+.delete-std {
+    background-color: #f44336 !important;
+    color: white !important;
+    border: none !important;
+    padding: 5px 10px !important;
+    text-align: center !important;
+    text-decoration: none !important;
+    display: inline-block !important;
+    font-size: 16px !important;
+    margin: 4px 2px !important;
+    cursor: pointer !important;
+    border-radius: 8px !important;
+}
+
+.delete-std:hover {
+    opacity: 0.9 !important;
+}
+    </style>
 </head>
 
     
@@ -22,6 +42,7 @@
 
 <table id="myTable" class="student-table">
     <tr>
+        <th>Action</th>
         <th>First Name</th>
         <th>Middle Name</th>
         <th>Last Name</th>
@@ -41,29 +62,13 @@
         <th>Local address</th>
         <th>Permanent address</th>
         <th>Native place</th>
-        <th>X Percentage
-            <select class="filter-dropdown" id="xPercentFilter">
-                <option value="all">All</option>
-                <option value=">=60"> % > = 60 </option>
-                <option value="<60"> % < 60 </option> </th>
-
+        <th>X Percentage</th>
         <th>X year of passing</th>
         <th>X Board</th>
-        <th>XII Percentage
-            <select class="filter-dropdown" id="xiiPercentFilter">
-                <option value="all">All</option>
-                <option value=">=60"> % > = 60 </option>
-                <option value="<60"> % < 60 </option> </th>
-
+        <th>XII Percentage</th>
         <th>XII year of passing</th>
         <th>XII board</th>
-        <th>Diploma percentage
-            <select class="filter-dropdown" id="diplomaPercentFilter">
-                <option value="all">All</option>
-                <option value=">=60"> % > = 60 </option>
-                <option value="<60"> % < 60 </option>
-        </th>
-
+        <th>Diploma percentage</th>
         <th>Diploma year of passing</th>
         <th>Diploma college</th>
         <th>Diploma branch</th>
@@ -95,10 +100,6 @@
         <th>Sem8 sgpa</th>
         <th>Avg cgpa</th>
         <th>Avg sem percentage
-            <select class="filter-dropdown" id="avgPercentFilter">
-                <option value="all">All</option>
-                <option value=">=60"> % > = 60 </option>
-                <option value="<60"> % < 60 </option>
         </th>
 
         <th>Live backlogs
@@ -140,7 +141,9 @@
     <tbody>
         {% for student in students %}
         <tr>
-
+            <td>
+                <a href="{% url 'student_delete' student.pk %}" class="delete-std">Delete</a>
+            </td>
             <td><a href="{% url 'student_profile' student_prn=student.PRN %}" class="custom-link"><strong>{{ student.FIRST_NAME }}</strong></a></td>
             <td>{{ student.MIDDLE_NAME }}</td>
             <td>{{ student.LAST_NAME }}</td>
@@ -193,8 +196,6 @@
             </tr>
 
 
-
-
         {% endfor %}
     </tbody>
 </table>
@@ -204,10 +205,7 @@
     function applyFilters() {
         var genderFilter = document.getElementById("genderFilter").value;
         var departmentFilter = document.getElementById("departmentFilter").value;
-        var xPercentFilter = document.getElementById("xPercentFilter").value;
-        var xiiPercentFilter = document.getElementById("xiiPercentFilter").value;
-        var diplomaPercentFilter = document.getElementById("diplomaPercentFilter").value;
-        var avgPercentFilter = document.getElementById("avgPercentFilter").value;
+       
         var liveBacklogFilter = document.getElementById("liveBacklogFilter").value;
         var deadBacklogFilter = document.getElementById("deadBacklogFilter").value;
         var yearGapFilter = document.getElementById("yearGapFilter").value;
@@ -218,32 +216,23 @@
       
         for (var i = 1; i < rows.length; i++) {
           var row = rows[i];
-          var genderCell = row.cells[5];
-          var xPercentCell = row.cells[14];
-          var xiiPercentCell = row.cells[17];
-          var diplomaPercentCell = row.cells[20];
-          var departmentCell = row.cells[26];
-          var avgPercentCell = row.cells[36];
-          var liveBacklogCell = row.cells[37];
-          var deadBacklogCell = row.cells[38];
-          var yearGapCell = row.cells[39];
-          var placedCell = row.cells[43];
+          var genderCell = row.cells[6];
+          var departmentCell = row.cells[27];
+          var liveBacklogCell = row.cells[38];
+          var deadBacklogCell = row.cells[39];
+          var yearGapCell = row.cells[40];
+          var placedCell = row.cells[44];
       
           // Separate conditions with clear variable names
           var genderMatches = genderFilter === "all" || genderCell.textContent.trim().toLowerCase() === genderFilter.toLowerCase();
           var departmentMatches = departmentFilter === "all" || departmentCell.textContent.trim() === departmentFilter;
-          var xPercentMatches = xPercentFilter === "all" || xPercentCell.textContent.trim() === xPercentFilter;
-          var xiiPercentMatches = xiiPercentFilter === "all" || xiiPercentCell.textContent.trim() === xiiPercentFilter;
-          var diplomaPercentMatches = diplomaPercentFilter === "all" || diplomaPercentCell.textContent.trim() === diplomaPercentFilter;
-          var avgPercentMatches = avgPercentFilter === "all" || avgPercentCell.textContent.trim() === avgPercentFilter;
           var liveBacklogMatches = liveBacklogFilter === "all" || liveBacklogCell.textContent.trim() === liveBacklogFilter;
           var deadBacklogMatches = deadBacklogFilter === "all" || deadBacklogCell.textContent.trim() === deadBacklogFilter;
           var yearGapMatches = yearGapFilter === "all" || yearGapCell.textContent.trim() === yearGapFilter;
           var placedMatches = placedFilter === "all" || placedCell.textContent.trim() === placedFilter;
       
           // Combine conditions using AND operator (all conditions must be true)
-          if (genderMatches && departmentMatches && xPercentMatches && xiiPercentMatches && diplomaPercentMatches &&
-              avgPercentMatches && liveBacklogMatches && deadBacklogMatches && yearGapMatches && placedMatches) {
+          if (genderMatches && departmentMatches && liveBacklogMatches && deadBacklogMatches && yearGapMatches && placedMatches) {
             row.style.display = "";
           } else {
             row.style.display = "none";

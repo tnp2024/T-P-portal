@@ -223,27 +223,3 @@
       cursor: pointer;
       padding: 0;
   }
-
-  .flowing-text {
-      position: absolute;
-      left: 100%;
-      /* Initially position outside the container */
-      white-space: nowrap;
-      /* Prevent text from wrapping */
-      color: #0f3243;
-      /* Blue color */
-      animation: flowText 10s linear infinite;
-      /* Adjust duration as needed */
-  }
-
-  @keyframes flowText {
-      from {
-          transform: translateX(0);
-          /* Start from right edge of container */
-      }
-
-      to {
-          transform: translateX(-100%);
-          /* Move to left edge of container */
-      }
-  }

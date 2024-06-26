@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JNEC T&P PORTAL</title>
+<title>MGMU T&P PORTAL</title>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}" /> 
@@ -49,9 +49,7 @@
                         <a href="{% url 'password_reset' %}">Forgot Password?</a>
                     </div>
                 </form>
-                <div class="flowing-text">Your flowing text goes here.</div>
-                <!-- Ensure .flowing-text is directly inside .login-container -->
-            </div>
+ 
         </div>
     </div>
     
@@ -153,19 +151,7 @@
           }
       });
 
-      document.addEventListener('DOMContentLoaded', function() {
-    // Get the flowing text element
-    var flowingText = document.querySelector('.flowing-text');
-    
-    // Get the width of login-container
-    var containerWidth = document.querySelector('.login-container').offsetWidth;
-    
-    // Calculate duration based on the container width and animation speed
-    var duration = (containerWidth + flowingText.offsetWidth) / 50; // Adjust speed as needed
-    
-    // Set animation style
-    flowingText.style.animationDuration = duration + 's';
-});
+     
 
     </script>
 </body>

@@ -8,6 +8,8 @@ from django.contrib import messages
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
+from django.http import HttpResponseForbidden
+
 
 
 
@@ -187,6 +189,25 @@ def student_upload_files(request, student_prn):
     return render(request, 'student_file_uploads.html', {'form': form, 'student': student})
 
 
+
+@login_required
+def delete_student(request, pk):
+    student = get_object_or_404(Student, pk=pk)
+    
+    # Optional: Check for specific permissions or user roles
+    if request.user.user_type not in ['Coordinator', 'TNP-Office']:
+        return HttpResponseForbidden("You are not authorized to delete this account.")
+
+    if request.method == 'POST':
+        user = student.user
+        student.delete()
+        user.delete()
+        return redirect('all_students')  # Replace with your desired success URL
+
+    return render(request, 'student_delete.html', {'student': student})
+
+
+
 @login_required
 def profile(request):
     user_type = request.user.user_type
@@ -204,6 +225,10 @@ def profile(request):
         # Redirect to appropriate view if user is neither a coordinator nor TNP office member
         return redirect('login')  # Adjust this to your login URL
     
+
+
+
+
 
 
 
@@ -231,6 +256,9 @@ def register_student(request):
         student_form = StudentForm()
 
     return render(request, 'student_registration.html', {'user_form': user_form, 'student_form': student_form, })
+
+
+
 
 
 
