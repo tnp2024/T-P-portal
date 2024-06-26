@@ -8,9 +8,94 @@
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}" /> 
+<style>
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+}
 
+.curtain {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    z-index: 1000; /* Ensure it's above all other elements */
+}
+
+.left-curtain, .right-curtain {
+    width: 50%;
+    height: 100%;
+    background-image: url('static/images/curtains.jpg');
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    transition: transform 8s ease-in-out;
+}
+
+.left-curtain {
+    left: 0;
+    transform: translateX(0);
+}
+
+.right-curtain {
+    right: 0;
+    transform: translateX(0);
+}
+
+.container {
+    opacity: 0;
+    text-align: center;
+    z-index: 1;
+    transition: opacity 1s;
+}
+
+.ribbon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px 20px;
+    background-color: #ffffff;
+    color: rgb(240, 16, 16);
+    font-size: 1.5rem;
+    cursor: pointer;
+    border-radius: 10px;
+    z-index: 1500; /* Above the curtains */
+    display: flex;
+    align-items: center;
+}
+
+.ribbon img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.ribbon:hover {
+    background-color: #6e7376;
+}
+</style>
 </head>
+
 <body>
+
+    <div class="curtain">
+        <div class="left-curtain"></div>
+        <div class="right-curtain"></div>
+    </div>
+
+    <div class="ribbon" id="ribbon">Click to Start</div>
+
+
     <div class="container">
         <div class="left-section">
             <div class="upper-left">
@@ -103,6 +188,20 @@
     </div>
 
     <script>
+
+        window.addEventListener('load', () => {
+        const leftCurtain = document.querySelector('.left-curtain');
+        const rightCurtain = document.querySelector('.right-curtain');
+        const content = document.querySelector('.container');
+        const ribbon = document.getElementById('ribbon');
+
+        ribbon.addEventListener('click', () => {
+            leftCurtain.style.transform = 'translateX(-100%)';
+            rightCurtain.style.transform = 'translateX(100%)';
+            content.style.opacity = '1';
+            ribbon.style.display = 'none';
+        });
+    });
       // Function to close the pop-up
       function closePopup() {
           document.getElementById('termsPopup').style.display = 'none';
