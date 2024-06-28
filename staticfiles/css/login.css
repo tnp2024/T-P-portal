@@ -4,7 +4,8 @@
       align-items: center;
       margin: 0;
       height: 100vh;
-      font-family: 'poppins', sans-serif;
+      font-family: 'Helvetica LT', 'Helvetica', sans-serif;
+      font-weight: lighter;
       background-color: #f0f2f5;
   }
 
@@ -38,6 +39,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      font-weight: lighter;
   }
 
   .lower-left {
