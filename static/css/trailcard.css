@@ -1,25 +1,16 @@
 .card-container {
-    position: absolute;
-    top: 140px;
     display: grid;
-    /* Consider this as an option */
-
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    /* Adjust minmax values as needed */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     grid-gap: 15px;
-    left: 6.3cm;
-    right: 1cm;
-    overflow: auto;
+    /* margin: 0 auto; */
+    /* Center the container */
     padding: 50px;
-
     width: 100%;
     max-width: 1350px;
     justify-content: center;
     font-family: 'Poppins', sans-serif;
-
+    margin-left: 6.8cm;
 }
-
-
 
 .card {
     border-radius: 20px;
@@ -27,12 +18,10 @@
     transition: box-shadow 0.3s ease;
     width: 300px;
     height: 250px;
-    /* Allow the height to adjust based on content */
     overflow: hidden;
     position: relative;
     border: 2px solid #e6e2e2;
     padding: 0px;
-    /* Add a black border */
 }
 
 .card:hover {
@@ -45,23 +34,16 @@
     overflow: hidden;
     width: 100%;
     height: 120px;
-
 }
 
 .card img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-
-
-    /* Ensure the image covers the entire container */
 }
 
-
 .all-text {
-
     height: 80px;
-    /* Set a fixed height for text containers */
     overflow: visible;
     margin-left: 10px;
     margin-right: 10px;
@@ -69,7 +51,6 @@
 
 .name {
     font-weight: bold;
-    /* white-space: nowrap; */
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -90,7 +71,6 @@
     border-radius: 4px;
     text-decoration: none;
     pointer-events: auto;
-
 }
 
 .btn a {
@@ -109,10 +89,9 @@
     text-align: start;
 }
 
-/*list css*/
+/* list css */
 
 .list-container {
-    top: 140px;
     flex-direction: column;
     margin-left: 6.8cm;
     overflow: auto;
@@ -127,13 +106,11 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: 20px;
-
     border-radius: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease;
     width: 1100px;
     height: 100px;
-    /* Allow the height to adjust based on content */
     overflow: hidden;
     position: relative;
     border: 2px solid #e6e2e2;
@@ -150,11 +127,8 @@
 
 .logo {
     width: 80px;
-    /* Adjust as needed */
     height: 80px;
-    /* Adjust as needed */
     margin-right: 20px;
-    /* Adjust as needed */
 }
 
 .logo img {
@@ -162,7 +136,6 @@
     height: 100%;
     object-fit: cover;
     border-radius: 10px;
-    /* Optional: Add border radius */
 }
 
 .dates {
@@ -179,16 +152,10 @@
 }
 
 .view-toggle {
-    position: relative;
-    left: 8cm;
-    transform: translateX(-50%);
-    cursor: pointer;
-    text-align: center;
-    margin-top: 120px;
-    margin-bottom: 10px;
+    margin-left: 8.2cm;
+    margin-top: 50px;
+    /* margin-bottom: 10px; */
     border-radius: 50px;
-    height: 10px;
-    width: 20px;
 }
 
 .view-toggle button {
@@ -201,9 +168,7 @@
     border: none;
     cursor: pointer;
     font-size: 5px;
-
 }
-
 
 .view-toggle button:hover {
     background-color: #63bbd1;
@@ -226,7 +191,6 @@
     position: absolute;
     z-index: 1;
     bottom: 125%;
-    /* Position above the button */
     left: 50%;
     margin-left: -50px;
     width: 100px;
@@ -255,8 +219,6 @@
     cursor: pointer;
 }
 
-
-
 .status-text {
     font-weight: bold;
 }
@@ -269,6 +231,37 @@
     color: rgba(0, 255, 0, 0.6);
 }
 
-.status-text.terminated {
+.status-text.closed {
     color: rgba(255, 0, 0, 0.6);
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination .step-links {
+    display: flex;
+    gap: 10px;
+}
+
+.pagination .step-links a {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.pagination .step-links a:hover {
+    background-color: #0056b3;
+}
+
+.pagination .step-links .current {
+    padding: 8px 16px;
+    background-color: #6c757d;
+    color: white;
+    border-radius: 4px;
 }

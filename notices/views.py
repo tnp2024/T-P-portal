@@ -61,10 +61,17 @@ def sidebar (request):
     return render(request,'sidebar.html',context)
 
 
+from django.core.paginator import Paginator
+
+
 @login_required
 def drives(request):
-    alldrives = Drive.objects.all()
-    return render(request, 'all-drives.html', {'alldrives': alldrives})
+    drive_list = Drive.objects.all()
+    paginator = Paginator(drive_list, 10)  # Show 10 drives per page
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'all-drives.html', {'page_obj': page_obj})
     
 @login_required
 def drive(request, pk):
@@ -247,10 +254,14 @@ def delete_Drive(request, pk):
 
 
 #--------------------------------------- ACTIVITY VIEWS------------------------------------------
-@login_required
 def activities(request):
-    activities = Activity.objects.all()
-    context ={'activities':activities}
+    activities_list = Activity.objects.all()
+    paginator = Paginator(activities_list, 10)  # Show 10 activities per page
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    context = {'page_obj': page_obj}
     return render(request, 'activities.html', context)
 @login_required
 def activity(request, pk):
@@ -393,25 +404,44 @@ def delete_Activity(request, pk):
     context={'activity':activity}
     return render(request, 'delete_activity.html', context)
 
-@student_not_required
+import logging
+from django.shortcuts import render, redirect, get_object_or_404
+
+logger = logging.getLogger(__name__)
+
 def upload_booklet(request):
     if request.method == 'POST':
         form = BookletForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            return redirect('all-booklets') 
+            # Check for duplicate booklets before saving
+            company_name = form.cleaned_data['company_name']
+            existing_booklet = Booklets.objects.filter(company_name=company_name).first()
+            if existing_booklet:
+                logger.warning(f"Duplicate booklet creation attempt for company: {company_name}")
+                # Handle the case where the booklet already exists
+                # You can return an error message or update the existing booklet
+                form.add_error(None, "A booklet for this company already exists.")
+            else:
+                form.save()
+                return redirect('all-booklets') 
     else:
         form = BookletForm()
     return render(request, 'upload_booklet.html', {'form': form})
 
+@login_required
+@student_not_required
+
 def update_Booklet(request, pk):
     booklet = get_object_or_404(Booklets, id=pk)
-    form = BookletForm(instance=booklet)
+    
     if request.method == 'POST':
         form = BookletForm(request.POST, request.FILES, instance=booklet)
         if form.is_valid():
             form.save()
-            return redirect('all-booklets')  # Redirect to any appropriate URL
+            return redirect('all-booklets')  # Redirect to any appropriate URL after successful update
+    else:
+        form = BookletForm(instance=booklet)  # Populate form with existing booklet data
+    
     context = {'form': form}
     return render(request, 'upload_booklet.html', context)
 
@@ -426,5 +456,6 @@ def delete_Booklet(request, pk):
 
 
 def list_booklets(request):
-    departments = Department.objects.prefetch_related('booklets_set').all()
-    return render(request, 'list_booklets.html', {'departments': departments})
+    departments = Department.objects.all()
+    unique_booklets = Booklets.objects.distinct()
+    return render(request, 'list_booklets.html', {'departments': departments, 'unique_booklets': unique_booklets})

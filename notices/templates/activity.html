@@ -25,10 +25,13 @@
                 <img src="{{ activity.company_logo.url }}" alt="Company Logo" class="logo">
             </div>        
             <h2>{{ activity.title }}</h2>    
-            <p><strong>Company Name:</strong> {{ activity.company_name }}</p>
-            <p><strong>Date:</strong> {{ activity.activity_date }}</p>
-            <p><strong>About:</strong> {{ activity.content }}</p>
+            <p><strong>Reference Number:</strong> {{ activity.Reference_no }}</p>
+
+            <p><strong>Date of Activity:</strong> {{ activity.activity_date }}</p>
             <p><strong>Industry Type:</strong> {{ activity.industry_type }}</p>
+           <p><strong>About:</strong> {{ activity.content }}</p>
+           <p><strong>Link:</strong> <a href="{{ activity.link }}" target="_blank">{{ activity.link }}</a></p>
+
 
             <p><strong>Departments:</strong>
                 {% for department in activity.department.all %}
@@ -54,7 +57,7 @@
                 <a href="{% url 'delete-activity' activity.activity_id %}" class="link">Delete</a>
                 {% endif %}
                 <a href="{% url 'download_activity_pdf' activity.activity_id %}" class="link">Download PDF</a>
-                {% if request.user.is_authenticated and request.user.user_type == 'Student' %}
+                {% if request.user.is_authenticated and request.user.user_type == 'Student' and activity.activity_status != 'Closed' %}
                 <a href="{% url 'apply_activity' activity.activity_id %}" class="link">Apply Now</a>
                 {% endif %}
                 {% if request.user.is_authenticated and request.user.user_type == 'Coordinator' %}

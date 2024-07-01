@@ -1,20 +1,15 @@
-
-
-
-
 {% extends 'main.html' %}
 
 {% block content %}
 
 <div class="view-toggle">
   <button id="toggleButton"><i class='bx bx-list-ul' ></i><span class="tooltip">Change View</span>
-
   </button>
 </div>
-<div class="card-container" id="cardContainer"> <!-- Correct class name to match CSS -->
 
-  {% for activity in activities %}
-  <div class="card" data-status="{{ drive.drive_status }}">
+<div class="card-container" id="cardContainer">
+  {% for activity in page_obj %}
+  <div class="card" data-status="{{ activity.activity_status }}">
     <div class="img">
       <img src="{{ activity.company_logo.url }}" alt="Company Logo" />
     </div>
@@ -31,8 +26,8 @@
 </div>
 
 <div class="list-container" id="listContainer" style="display: none;">
-  {% for activity in activities %}
-  <div class="list-item" data-status="{{ drive.drive_status }}">
+  {% for activity in page_obj %}
+  <div class="list-item" data-status="{{ activity.activity_status }}">
     <div class="list-item-left">
       <div class="logo">
         <img src="{{ activity.company_logo.url }}" alt="Company Logo" />
@@ -40,17 +35,35 @@
       <div class="dates">
         <div class="drive-title">{{ activity.title }}</div>
         <div class="post-date">Posted on: {{ activity.creation_date }} </div>
-        <div class="post-date">Date of Drive: {{activity.activity_date}} | Last Date: {{ activity.application_last_date }}  |  <span class="status-text {{ activity.activity_status | lower }}">{{ activity.activity_status }}</span> </div>
-
+        <div class="post-date">Date of Drive: {{ activity.activity_date }} | Last Date: {{ activity.application_last_date }}  |  <span class="status-text {{ activity.activity_status | lower }}">{{ activity.activity_status }}</span> </div>
       </div>
     </div>
     <div class="list-item-right">
-            <div class="list-read-more">
-              <a href="{% url 'activity' activity.activity_id %}">Read more</a>
-            </div>
+      <div class="list-read-more">
+        <a href="{% url 'activity' activity.activity_id %}">Read more</a>
+      </div>
     </div>
   </div>
   {% endfor %}
+</div>
+
+<!-- Pagination controls -->
+<div class="pagination">
+  <span class="step-links">
+      {% if page_obj.has_previous %}
+          <a href="?page=1">&laquo; first</a>
+          <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+      {% endif %}
+
+      <span class="current">
+          Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+      </span>
+
+      {% if page_obj.has_next %}
+          <a href="?page={{ page_obj.next_page_number }}">next</a>
+          <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+      {% endif %}
+  </span>
 </div>
 
 <script>
@@ -93,7 +106,7 @@
                  btnParent.classList.add(`${baseClass}-shadow-yellow`);
              } else if (status === "Active") {
                  btnParent.classList.add(`${baseClass}-shadow-green`);
-             } else if (status === "Terminated") {
+             } else if (status === "Closed") {
                  btnParent.classList.add(`${baseClass}-shadow-red`);
              }
          });
@@ -106,8 +119,6 @@
      updateButtonShadowColor(listButtons, "list-read-more");
  });
  
- </script>
+</script>
 
 {% endblock %}
-
-

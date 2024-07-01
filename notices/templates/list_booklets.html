@@ -11,7 +11,7 @@
         margin-left: 6.8cm;
         overflow: auto;
         padding: 30px;
-        max-width: 1000px;
+        max-width: 2000px;
         margin-top: 100px;
     }
     .booklet-item {
@@ -117,6 +117,7 @@
 
 
 </style>
+
 {% if request.user.is_authenticated and request.user.user_type != 'Student' %}
 <div class="notice_button">
     
@@ -126,33 +127,31 @@
   {% endif %}
 
 <div class="list-container" id="listContainer">
-    {% for department in departments %}
-        {% for booklet in department.booklets_set.all %}
-            <div class="booklet-item">
-                <div class="booklet-left">
-                    <div class="booklet-thumbnail">
-                        <img src="{{ booklet.company_logo.url }}" alt="{{ booklet.company_name }} Thumbnail">
-                    </div>
-                    <div class="booklet-info">
-                        <div class="booklet-title">{{ booklet.company_name }}</div>
-                        <div class="booklet-date">Uploaded on {{ booklet.creation_date }}</div>
-                        <div class="booklet-department">Department: {{ department.name }}</div>
-                    </div>
+    {% for booklet in unique_booklets %}
+        <div class="booklet-item">
+            <div class="booklet-left">
+                <div class="booklet-thumbnail">
+                    <img src="{{ booklet.company_logo.url }}" alt="{{ booklet.company_name }} Thumbnail">
                 </div>
-                <div>
-                    {% if request.user.is_authenticated and request.user.user_type != 'Student' %}
-
-                    <a href="{% url 'delete-booklet' booklet.id %}" class="booklet-link" >Delete Booklet</a>
-                    <a href="{% url 'update-booklet' booklet.id %}" class="booklet-link" >Edit Booklet</a>
-                    {% endif %}
-
-                    <a href="{{ booklet.booklet.url }}" class="booklet-link" target="_blank">View Booklet</a>
+                <div class="booklet-info">
+                    <div class="booklet-title">{{ booklet.company_name }}</div>
+                    <div class="booklet-date">Uploaded on {{ booklet.creation_date }}</div>
+                    <div class="booklet-department">
+                        Departments:
+                        {% for department in booklet.department.all %}
+                            {{ department.name }}{% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
-        {% endfor %}
+            <div>
+                {% if request.user.is_authenticated and request.user.user_type != 'Student' %}
+                    <a href="{% url 'delete-booklet' booklet.id %}" class="booklet-link">Delete Booklet</a>
+                    <a href="{% url 'update-booklet' booklet.id %}" class="booklet-link">Edit Booklet</a>
+                {% endif %}
+                <a href="{{ booklet.booklet.url }}" class="booklet-link" target="_blank">View Booklet</a>
+            </div>
+        </div>
     {% endfor %}
 </div>
-
-{% endblock %}
-
-
+{% endblock%}

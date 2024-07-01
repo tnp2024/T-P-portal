@@ -56,14 +56,7 @@ class StudentForm(forms.ModelForm):
         choices=Student.preferences,
         widget=forms.Select(attrs={'class': 'form-select'})
     )
-    # Placed = forms.ChoiceField(
-    #     choices=Student.Boolean_choices,
-    #     widget=forms.Select(attrs={'class': 'form-select'})
-    # )
-    # Placement_type = forms.ChoiceField(
-    #     choices=Student.Placement_choice,
-    #     widget=forms.Select(attrs={'class': 'form-select'})
-    # )
+
     Pass_out_Year = forms.ChoiceField(
         choices=Student.YEAR_CHOICES,
         widget=forms.Select(attrs={'class': 'form-select'})
@@ -105,7 +98,7 @@ class StudentForm(forms.ModelForm):
             'SEM_6_sgpa': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Enter your SEM 6 SGPA'}),
             'SEM_7_sgpa': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Enter your SEM 7 SGPA'}),
             'SEM_8_sgpa': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Enter your SEM 8 SGPA'}),
-            'Languages': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter languages you know'}),
+            'Languages': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter programming languages you know'}),
             'minor_projects': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter your minor projects'}),
             'major_projects': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter your major projects'}),
             'Profile_photo': forms.ClearableFileInput(attrs={'class': 'form-control', 'placeholder': 'Upload your profile photo'}),

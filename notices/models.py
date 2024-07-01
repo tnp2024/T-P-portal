@@ -18,7 +18,7 @@ class Department(models.Model):
 class Drive(models.Model):
 
     DRIVE_STATUS_CHOICES = [
-        ('Terminated', 'Terminated'),
+        ('Closed', 'Closed'),
         ('Active', 'Active'),
         ('Upcoming', 'Upcoming'),
     ]
@@ -29,7 +29,6 @@ class Drive(models.Model):
     company_logo = models.ImageField(null=True,blank=True,upload_to='logos/')
     date = models.DateField()
     application_last_date = models.DateField(default='2002-12-02')
-
     content = models.TextField()
     Bond = models.CharField(max_length=50)
     industry_type = models.CharField(max_length=50) 
@@ -52,17 +51,20 @@ class Drive(models.Model):
     drive_status = models.CharField(max_length=10, choices=DRIVE_STATUS_CHOICES, default='Upcoming')
 
     def save(self, *args, **kwargs):
-        if self.application_last_date >= timezone.now().date():
-            self.drive_status = 'Upcoming'
-        else:
+        today = timezone.now().date()
+        if self.date == today:
             self.drive_status = 'Active'
+        elif self.date > today:
+            self.drive_status = 'Upcoming'
         super().save(*args, **kwargs)
 
     def __str__(self):
         return self.title
 
     class Meta:
-        ordering = ['creation_date']
+        ordering = ['-creation_date']
+    
+  
 
 
 from django.db import models
@@ -70,7 +72,7 @@ from django.db import models
 class Activity(models.Model):      
 
     ACTIVITY_STATUS_CHOICES = [
-        ('Terminated', 'Terminated'),
+        ('Closed', 'Closed'),
         ('Active', 'Active'),
         ('Upcoming', 'Upcoming'),
     ]
@@ -84,20 +86,31 @@ class Activity(models.Model):
     department = models.ManyToManyField(Department)
     content = models.TextField()
     creation_date = models.DateTimeField(auto_now_add=True)
+    link = models.CharField(max_length=200, blank=True)
     activity_status = models.CharField(max_length=10, choices=ACTIVITY_STATUS_CHOICES, default='Upcoming')
 
+    def save(self, *args, **kwargs):
+        today = timezone.now().date()
+        if self.activity_date == today:
+            self.activity_status = 'Active'
+        elif self.activity_date > today:
+            self.activity_status = 'Upcoming'
+        super().save(*args, **kwargs)
+    
     def __str__(self):
         return self.title
     class Meta:
-        ordering = ['creation_date']
+        ordering = ['-creation_date']
+
+  
 
 class Booklets(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    id = models.AutoField(primary_key=True, editable=False)
     booklet = models.FileField(upload_to='booklets/')
-    department = models.ManyToManyField('Department')
+    department = models.ManyToManyField(Department)
     company_name = models.CharField(max_length=255)
     creation_date = models.DateTimeField(auto_now_add=True)
-    company_logo = models.ImageField(null=True,blank=True,upload_to='logos/')
+    company_logo = models.ImageField(null=True, blank=True, upload_to='logos/')
 
     def __str__(self):
         return self.company_name

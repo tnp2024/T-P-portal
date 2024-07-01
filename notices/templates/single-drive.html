@@ -24,8 +24,10 @@
             <div class="logo-container">
                 <img src="{{ drive.company_logo.url }}" alt="Company Logo" class="logo">
             </div>            
+            <h2>{{ drive.title }}</h2>    
+
             <p><strong>Reference Number:</strong> {{ drive.Reference_no }}</p>
-            <p><strong>Date:</strong> {{ drive.date }}</p>
+            <p><strong>Date of Drive:</strong> {{ drive.date }}</p>
             <p><strong>Last date to Apply:</strong> {{ drive.application_last_date }}</p>
 
             <p><strong>Job CTC:</strong> {{ drive.job_CTC }}</p>
@@ -86,7 +88,7 @@
                 {% endif %}
 
                 <a href="{% url 'download_drive_pdf' drive.drive_id %}" class="link",id="downloadButton" >Download PDF</a>
-                {% if request.user.is_authenticated and request.user.user_type == 'Student' %}
+                {% if request.user.is_authenticated and request.user.user_type == 'Student' and drive.drive_status != 'Closed' %}
                 <a href="{% url 'apply_drive' drive.drive_id %}" class="link">Apply Now</a>
                 {% endif %}
                 {% if request.user.is_authenticated and request.user.user_type == 'Coordinator' %}

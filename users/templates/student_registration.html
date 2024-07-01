@@ -8,6 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
   <link rel="stylesheet" href="{% static 'css/registration.css' %}">
+
 </head>
 <body>
   <div class="container">
@@ -28,307 +29,37 @@
         <form method="POST" enctype="multipart/form-data">
           {% csrf_token %}
 
-          <!-- User Form Fields -->
-          <div class="reg-form-group">
-            <label for="{{ user_form.email.id_for_label }}">Email Address</label>
-            {{ user_form.email }}
-            {% for error in user_form.email.errors %}
-            <div class="error">{{ error }}</div>
-            {% endfor %}
-          </div>
 
-          <div class="reg-form-group">
-            <label for="{{ user_form.user_type.id_for_label }}">User Type</label>
-            {{ user_form.user_type }}
-            {% for error in user_form.user_type.errors %}
-            <div class="error">{{ error }}</div>
-            {% endfor %}
-          </div>
+          {% if form.non_field_errors %}
+            <div class="error-message">
+              {{ form.non_field_errors }}
+            </div>
+          {% endif %}
 
-          <!-- Student Form Fields -->
-          <div class="reg-form-group">
-            <label for="{{ student_form.FIRST_NAME.id_for_label }}">First Name</label>
-            {{ student_form.FIRST_NAME }}
-            {% for error in student_form.FIRST_NAME.errors %}
-            <div class="error">{{ error }}</div>
-            {% endfor %}
-          </div>
-
-          <div class="reg-form-group">
-            <label for="{{ student_form.MIDDLE_NAME.id_for_label }}">Middle Name</label>
-            {{ student_form.MIDDLE_NAME }}
-            {% for error in student_form.MIDDLE_NAME.errors %}
-            <div class="error">{{ error }}</div>
-            {% endfor %}
-          </div>
-
-          <div class="reg-form-group">
-            <label for="{{ student_form.LAST_NAME.id_for_label }}">Last Name</label>
-            {{ student_form.LAST_NAME }}
-            {% for error in student_form.LAST_NAME.errors %}
-            <div class="error">{{ error }}</div>
-            {% endfor %}
-          </div>
-
-                   <!-- Student Form Fields (continued) -->
-          <div class="reg-form-group">
-            <label for="{{ student_form.PRN.id_for_label }}">PRN</label>
-            {{ student_form.PRN }}
-            {% for error in student_form.PRN.errors %}
-            <div class="error">{{ error }}</div>
-            {% endfor %}
-          </div>
-
-          <div class="reg-form-group">
-            <label for="{{ student_form.EMAIL.id_for_label }}">Email</label>
-            {{ student_form.EMAIL }}
-            {% for error in student_form.EMAIL.errors %}
-            <div class="error">{{ error }}</div>
-            {% endfor %}
-          </div>
-
-          <div class="reg-form-group">
-            <label for="{{ student_form.PERSONAL_EMAIL.id_for_label }}">Personal Email</label>
-            {{ student_form.PERSONAL_EMAIL }}
-            {% for error in student_form.PERSONAL_EMAIL.errors %}
-            <div class="error">{{ error }}</div>
-            {% endfor %}
-          </div>
-
-          <div class="reg-form-group">
-            <label for="{{ student_form.AGE.id_for_label }}">Age</label>
-            {{ student_form.AGE }}
-            {% for error in student_form.AGE.errors %}
-            <div class="error">{{ error }}</div>
-            {% endfor %}
-          </div>
-
-          <div class="reg-form-group">
-            <label for="{{ student_form.MOBILE_NO.id_for_label }}">Mobile Number</label>
-            {{ student_form.MOBILE_NO }}
-            {% for error in student_form.MOBILE_NO.errors %}
-            <div class="error">{{ error }}</div>
-            {% endfor %}
-          </div>
-
-          <div class="reg-form-group">
-            <label for="{{ student_form.ALT_Mobile_NO.id_for_label }}">Alternate Mobile Number</label>
-            {{ student_form.ALT_Mobile_NO }}
-            {% for error in student_form.ALT_Mobile_NO.errors %}
-            <div class="error">{{ error }}</div>
-            {% endfor %}
-          </div>
-
-          <div class="reg-form-group">
-            <label for="{{ student_form.LOCAL_ADDRS.id_for_label }}">Local Address</label>
-            {{ student_form.LOCAL_ADDRS }}
-            {% for error in student_form.LOCAL_ADDRS.errors %}
-            <div class="error">{{ error }}</div>
-            {% endfor %}
-          </div>
-
-          <div class="reg-form-group">
-            <label for="{{ student_form.PERM_ADDRS.id_for_label }}">Permanent Address</label>
-            {{ student_form.PERM_ADDRS }}
-            {% for error in student_form.PERM_ADDRS.errors %}
-            <div class="error">{{ error }}</div>
-            {% endfor %}
-          </div>
-
-          <div class="reg-form-group">
-            <label for="{{ student_form.Native_Place.id_for_label }}">Native Place</label>
-            {{ student_form.Native_Place }}
-            {% for error in student_form.Native_Place.errors %}
-            <div class="error">{{ error }}</div>
-            {% endfor %}
-          </div>
-
-                    <!-- Student Form Fields (continued) -->
-                    <div class="reg-form-group">
-                      <label for="{{ student_form.X_Percentage.id_for_label }}">10th Percentage</label>
-                      {{ student_form.X_Percentage }}
-                      {% for error in student_form.X_Percentage.errors %}
-                      <div class="error">{{ error }}</div>
-                      {% endfor %}
-                    </div>
+          {% for field in user_form %}
+            <div class="reg-form-group">
+              <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+              {{ field }}
+              {% if field.errors %}
+                <div class="error-message">
+                  {{ field.errors }}
+                </div>
+              {% endif %}
+            </div>
+          {% endfor %}
+    
+          {% for field in student_form %}
+            <div class="reg-form-group">
+              <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+              {{ field }}
+              {% if field.errors %}
+                <div class="error-message">
+                  {{ field.errors }}
+                </div>
+              {% endif %}
+            </div>
+          {% endfor %}
           
-                    <div class="reg-form-group">
-                      <label for="{{ student_form.X_year_of_passing.id_for_label }}">10th Year of Passing</label>
-                      {{ student_form.X_year_of_passing }}
-                      {% for error in student_form.X_year_of_passing.errors %}
-                      <div class="error">{{ error }}</div>
-                      {% endfor %}
-                    </div>
-          
-                    <div class="reg-form-group">
-                      <label for="{{ student_form.X_board.id_for_label }}">10th Board</label>
-                      {{ student_form.X_board }}
-                      {% for error in student_form.X_board.errors %}
-                      <div class="error">{{ error }}</div>
-                      {% endfor %}
-                    </div>
-          
-                    <div class="reg-form-group">
-                      <label for="{{ student_form.XII_Percentage.id_for_label }}">12th Percentage</label>
-                      {{ student_form.XII_Percentage }}
-                      {% for error in student_form.XII_Percentage.errors %}
-                      <div class="error">{{ error }}</div>
-                      {% endfor %}
-                    </div>
-          
-                    <div class="reg-form-group">
-                      <label for="{{ student_form.XII_year_of_passing.id_for_label }}">12th Year of Passing</label>
-                      {{ student_form.XII_year_of_passing }}
-                      {% for error in student_form.XII_year_of_passing.errors %}
-                      <div class="error">{{ error }}</div>
-                      {% endfor %}
-                    </div>
-          
-                    <div class="reg-form-group">
-                      <label for="{{ student_form.XII_board.id_for_label }}">12th Board</label>
-                      {{ student_form.XII_board }}
-                      {% for error in student_form.XII_board.errors %}
-                      <div class="error">{{ error }}</div>
-                      {% endfor %}
-                    </div>
-          
-                    <div class="reg-form-group">
-                      <label for="{{ student_form.Diploma_percentage.id_for_label }}">Diploma Percentage</label>
-                      {{ student_form.Diploma_percentage }}
-                      {% for error in student_form.Diploma_percentage.errors %}
-                      <div class="error">{{ error }}</div>
-                      {% endfor %}
-                    </div>
-          
-                    <div class="reg-form-group">
-                      <label for="{{ student_form.Diploma_year_of_passing.id_for_label }}">Diploma Year of Passing</label>
-                      {{ student_form.Diploma_year_of_passing }}
-                      {% for error in student_form.Diploma_year_of_passing.errors %}
-                      <div class="error">{{ error }}</div>
-                      {% endfor %}
-                    </div>
-          
-                    <div class="reg-form-group">
-                      <label for="{{ student_form.Diploma_college.id_for_label }}">Diploma College</label>
-                      {{ student_form.Diploma_college }}
-                      {% for error in student_form.Diploma_college.errors %}
-                      <div class="error">{{ error }}</div>
-                      {% endfor %}
-                    </div>
-          
-                    <div class="reg-form-group">
-                      <label for="{{ student_form.Diploma_branch.id_for_label }}">Diploma Branch</label>
-                      {{ student_form.Diploma_branch }}
-                      {% for error in student_form.Diploma_branch.errors %}
-                      <div class="error">{{ error }}</div>
-                      {% endfor %}
-                    </div>
-          
-                    <div class="reg-form-group">
-                      <label for="{{ student_form.Admission_Type.id_for_label }}">Admission Type</label>
-                      {{ student_form.Admission_Type }}
-                      {% for error in student_form.Admission_Type.errors %}
-                      <div class="error">{{ error }}</div>
-                      {% endfor %}
-                    </div>
-          
-                            <!-- Student Form Fields (continued) -->
-          <div class="reg-form-group">
-            <label for="{{ student_form.SEM_1_sgpa.id_for_label }}">SEM 1 SGPA</label>
-            {{ student_form.SEM_1_sgpa }}
-            {% for error in student_form.SEM_1_sgpa.errors %}
-            <div class="error">{{ error }}</div>
-            {% endfor %}
-          </div>
-
-          <div class="reg-form-group">
-            <label for="{{ student_form.SEM_2_sgpa.id_for_label }}">SEM 2 SGPA</label>
-            {{ student_form.SEM_2_sgpa }}
-            {% for error in student_form.SEM_2_sgpa.errors %}
-            <div class="error">{{ error }}</div>
-            {% endfor %}
-          </div>
-
-          <div class="reg-form-group">
-            <label for="{{ student_form.SEM_3_sgpa.id_for_label }}">SEM 3 SGPA</label>
-            {{ student_form.SEM_3_sgpa }}
-            {% for error in student_form.SEM_3_sgpa.errors %}
-            <div class="error">{{ error }}</div>
-            {% endfor %}
-          </div>
-
-          <div class="reg-form-group">
-            <label for="{{ student_form.SEM_4_sgpa.id_for_label }}">SEM 4 SGPA</label>
-            {{ student_form.SEM_4_sgpa }}
-            {% for error in student_form.SEM_4_sgpa.errors %}
-            <div class="error">{{ error }}</div>
-            {% endfor %}
-          </div>
-
-          <div class="reg-form-group">
-            <label for="{{ student_form.SEM_5_sgpa.id_for_label }}">SEM 5 SGPA</label>
-            {{ student_form.SEM_5_sgpa }}
-            {% for error in student_form.SEM_5_sgpa.errors %}
-            <div class="error">{{ error }}</div>
-            {% endfor %}
-          </div>
-
-          <div class="reg-form-group">
-            <label for="{{ student_form.SEM_6_sgpa.id_for_label }}">SEM 6 SGPA</label>
-            {{ student_form.SEM_6_sgpa }}
-            {% for error in student_form.SEM_6_sgpa.errors %}
-            <div class="error">{{ error }}</div>
-            {% endfor %}
-          </div>
-
-          <div class="reg-form-group">
-            <label for="{{ student_form.SEM_7_sgpa.id_for_label }}">SEM 7 SGPA</label>
-            {{ student_form.SEM_7_sgpa }}
-            {% for error in student_form.SEM_7_sgpa.errors %}
-            <div class="error">{{ error }}</div>
-            {% endfor %}
-          </div>
-
-          <div class="reg-form-group">
-            <label for="{{ student_form.SEM_8_sgpa.id_for_label }}">SEM 8 SGPA</label>
-            {{ student_form.SEM_8_sgpa }}
-            {% for error in student_form.SEM_8_sgpa.errors %}
-            <div class="error">{{ error }}</div>
-            {% endfor %}
-          </div>
-
-          <div class="reg-form-group">
-            <label for="{{ student_form.Languages.id_for_label }}">Programming Languages Known</label>
-            {{ student_form.Languages }}
-            {% for error in student_form.Languages.errors %}
-            <div class="error">{{ error }}</div>
-            {% endfor %}
-          </div>
-
-          <div class="reg-form-group">
-            <label for="{{ student_form.minor_projects.id_for_label }}">Minor Projects</label>
-            {{ student_form.minor_projects }}
-            {% for error in student_form.minor_projects.errors %}
-            <div class="error">{{ error }}</div>
-            {% endfor %}
-          </div>
-
-          <div class="reg-form-group">
-            <label for="{{ student_form.major_projects.id_for_label }}">Major Projects</label>
-            {{ student_form.major_projects }}
-            {% for error in student_form.major_projects.errors %}
-            <div class="error">{{ error }}</div>
-            {% endfor %}
-          </div>
-
-          <div class="reg-form-group">
-            <label for="{{ student_form.Profile_photo.id_for_label }}">Profile Photo</label>
-            {{ student_form.Profile_photo }}
-            {% for error in student_form.Profile_photo.errors %}
-            <div class="error">{{ error }}</div>
-            {% endfor %}
-          </div>
-
           <div class="register-btn">
             <button type="submit" class="btn-primary">Register</button>
           </div>
