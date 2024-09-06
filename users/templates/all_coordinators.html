@@ -60,34 +60,25 @@
         background-color: #ff1a1a;
     }
     button {
-    font-family: 'Poppins', sans-serif;
-
-    padding: 8px 16px;
-    margin-bottom: 10px;
-
-
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
-    /* border-radius: 30px; */
-    background-color: #63bbd1;
-    color: white;
-    /* White text */
-    font-size: 15px;
-    position: relative;
-    overflow: hidden;
-    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
-    /* Transition background-color, color, and transform */
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    /* Add shadow for depth */
-}
-button:hover {
-    color: white;
-    background-color: #0f3243;
-
-    /* Add more pronounced upward movement on hover */
-}
+        font-family: 'Poppins', sans-serif;
+        padding: 8px 16px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        border: none;
+        border-radius: 5px;
+        background-color: #63bbd1;
+        color: white;
+        font-size: 15px;
+        position: relative;
+        overflow: hidden;
+        transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    button:hover {
+        color: white;
+        background-color: #0f3243;
+    }
 </style>
 
 <div class="table-container">
@@ -105,7 +96,7 @@ button:hover {
                 <th>Department</th>
                 <th>Personal Email</th>
                 <th>Institution</th>
-                <!-- <th>Actions</th> Action column -->
+                <th>Actions</th> <!-- Action column -->
             </tr>
         </thead>
         <tbody>
@@ -119,11 +110,7 @@ button:hover {
                 <td>{{ coordinator.department }}</td>
                 <td>{{ coordinator.PERSONAL_EMAIL }}</td>
                 <td>{{ coordinator.INSTITUTE }}</td>
-                <!-- <td>
-               
-                    <a href="" class="delete-button">Delete</a>
-                    
-                </td> -->
+    
             </tr>
             {% endfor %}
         </tbody>

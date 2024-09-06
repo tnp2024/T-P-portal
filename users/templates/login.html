@@ -11,9 +11,96 @@
 
 </head>
 
+</html>
+
+
+
+<style>
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+}
+
+.curtain {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    z-index: 1000; /* Ensure it's above all other elements */
+}
+
+.left-curtain, .right-curtain {
+    width: 50%;
+    height: 100%;
+    background-image: url('static/images/curtains.jpg');
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    transition: transform 8s ease-in-out;
+}
+
+.left-curtain {
+    left: 0;
+    transform: translateX(0);
+}
+
+.right-curtain {
+    right: 0;
+    transform: translateX(0);
+}
+
+.container {
+    opacity: 0;
+    text-align: center;
+    z-index: 1;
+    transition: opacity 1s;
+}
+
+.ribbon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px 20px;
+    background-color: #ffffff;
+    color: rgb(240, 16, 16);
+    font-size: 1.5rem;
+    cursor: pointer;
+    border-radius: 10px;
+    z-index: 1500; /* Above the curtains */
+    display: flex;
+    align-items: center;
+}
+
+.ribbon img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.ribbon:hover {
+    background-color: #6e7376;
+}
+</style>
+</head>
+
 <body>
 
+    <div class="curtain">
+        <div class="left-curtain"></div>
+        <div class="right-curtain"></div>
+    </div>
 
+    <div class="ribbon" id="ribbon">Click to Start</div>
 
 
     <div class="container">
@@ -107,60 +194,40 @@
             <button type="button" id="agreeBtn" class="btn btn-success">I Agree</button>
         </div>
     </div>
-
     <script>
 
+        window.addEventListener('load', () => {
+        const leftCurtain = document.querySelector('.left-curtain');
+        const rightCurtain = document.querySelector('.right-curtain');
+        const content = document.querySelector('.container');
+        const ribbon = document.getElementById('ribbon');
 
-      // Function to close the pop-up
-      function closePopup() {
-          document.getElementById('termsPopup').style.display = 'none';
-      }
-  
-      // JavaScript to toggle password visibility
-      document.querySelector('.toggle-password').addEventListener('click', function (e) {
-          var passwordInput = document.getElementById('password');
-          if (passwordInput.type === 'password') {
-              passwordInput.type = 'text';
-              e.target.classList.remove('fa-eye');
-              e.target.classList.add('fa-eye-slash');
-          } else {
-              passwordInput.type = 'password';
-              e.target.classList.remove('fa-eye-slash');
-              e.target.classList.add('fa-eye');
-          }
-      });
-  
-      // JavaScript for greeting animation
-      document.querySelectorAll('.form-group input').forEach(input => {
-          input.addEventListener('focus', function() {
-              this.nextElementSibling.nextElementSibling.style.opacity = 1;
-          });
-          input.addEventListener('blur', function() {
-              this.nextElementSibling.nextElementSibling.style.opacity = 0;
-          });
-      });
-  
-      // JavaScript for handling the pop-up and redirection
-      document.getElementById('registerLink').addEventListener('click', function(event) {
-          event.preventDefault();
-          document.getElementById('termsPopup').style.display = 'flex';
-      });
-  
-      document.getElementById('agreeBtn').addEventListener('click', function() {
-          document.getElementById('termsPopup').style.display = 'none';
-          window.location.href = "{% url 'register-student' %}";
-      });
-  
-      // Close the pop-up if clicked outside of the content
-      window.addEventListener('click', function(event) {
-          const popup = document.getElementById('termsPopup');
-          if (event.target === popup) {
-              popup.style.display = 'none';
-          }
-      });
+        ribbon.addEventListener('click', () => {
+            leftCurtain.style.transform = 'translateX(-100%)';
+            rightCurtain.style.transform = 'translateX(100%)';
+            content.style.opacity = '1';
+            ribbon.style.display = 'none';
+        });
+    });
 
      
 
     </script>
 </body>
-</html>
+
+
+    <script>
+
+        window.addEventListener('load', () => {
+        const leftCurtain = document.querySelector('.left-curtain');
+        const rightCurtain = document.querySelector('.right-curtain');
+        const content = document.querySelector('.container');
+        const ribbon = document.getElementById('ribbon');
+
+        ribbon.addEventListener('click', () => {
+            leftCurtain.style.transform = 'translateX(-100%)';
+            rightCurtain.style.transform = 'translateX(100%)';
+            content.style.opacity = '1';
+            ribbon.style.display = 'none';
+        });
+    });

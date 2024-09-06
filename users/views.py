@@ -246,7 +246,7 @@ def register_student(request):
             print("DATA:",student_form.cleaned_data )
             user.backend = 'users.authentication.EmailBackend'             
             # login(request, user)
-            return redirect('login')
+            return redirect('login') 
                 
         else:
             # Print form errors for debugging
@@ -300,7 +300,6 @@ def edit_coordinator_profile(request):
         form = CoordinatorForm(instance=coordinator)
 
     return render(request, 'edit_coordinator_profile.html', {'form': form})
-
 
 
 

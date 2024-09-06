@@ -31,7 +31,7 @@
             <p><strong>Last date to Apply:</strong> {{ drive.application_last_date }}</p>
 
             <p><strong>Job CTC:</strong> {{ drive.job_CTC }}</p>
-            <p><strong>About:</strong> {{ drive.content }}</p>
+            <p><strong>About:</strong> {{ drive.content |linebreaks  }}</p>
             <p><strong>Bond:</strong> {{ drive.Bond }}</p>
             <p><strong>Industry Type:</strong> {{ drive.industry_type }}</p>
 
@@ -42,10 +42,10 @@
             </p>
             
             <p><strong>Job Role:</strong> {{ drive.job_role }}</p>
-            <p><strong>Job Description:</strong> {{ drive.job_description }}</p>
+            <p><strong>Job Description:</strong> {{ drive.job_description |linebreaks  }}</p>
 
             <p><strong>Job Location:</strong> {{ drive.job_location }}</p>
-            <p><strong>Job Eligibility:</strong> {{ drive.job_eligibility }}</p>
+            <p><strong>Job Eligibility:</strong> {{ drive.job_eligibility |linebreaks }}</p>
             <p><strong>Rounds for Selection:</strong> {{ drive.num_rounds }}</p>
             {% if drive.round1%}
             <p><strong>Round 1:</strong> {{ drive.round1 }}</p>

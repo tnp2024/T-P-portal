@@ -10,7 +10,7 @@ from django.shortcuts import render,redirect,get_object_or_404
 from .models import Drive,Activity,Department,Booklets
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
-
+from django.core.paginator import Paginator
 from .forms import DriveForm,ActivityForm,BookletForm
 # Create your views here.
 
@@ -56,12 +56,12 @@ def dashboard(request):
     context = {'drve_count':drive_count,'activity_count':activity_count}
     return render(request,'dashboard.html',context)
 
+@login_required
 def sidebar (request):
     context = {'user': request.user}
     return render(request,'sidebar.html',context)
 
 
-from django.core.paginator import Paginator
 
 
 @login_required
